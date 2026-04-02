@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Estratégico · Oxigenar & Pulmonair 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0a0f1e;
+    --surface: #111827;
+    --surface2: #1a2236;
+    --border: rgba(255,255,255,0.07);
+    --text: #e8edf5;
+    --muted: #6b7a99;
+    --accent: #3b82f6;
+    --accent2: #06b6d4;
+    --green: #10b981;
+    --red: #ef4444;
+    --gold: #f59e0b;
+    --oxigenar: #3b82f6;
+    --pulmonair: #8b5cf6;
+    --grad1: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+    --grad2: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Background subtle grid */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrapper { position: relative; z-index: 1; }
+
+  /* ── HEADER ── */
+  .header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 40px 48px 32px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(59,130,246,0.06) 0%, transparent 100%);
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .header-left {}
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 8px;
+  }
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 400;
+    line-height: 1.1;
+    color: #fff;
+    letter-spacing: -0.02em;
+  }
+  .header h1 em {
+    font-style: italic;
+    background: var(--grad1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .header-sub {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 300;
+  }
+  .badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding-top: 8px;
+  }
+  .badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  .badge-blue { background: rgba(59,130,246,0.15); color: #93c5fd; border: 1px solid rgba(59,130,246,0.3); }
+  .badge-purple { background: rgba(139,92,246,0.15); color: #c4b5fd; border: 1px solid rgba(139,92,246,0.3); }
+  .badge-gold { background: rgba(245,158,11,0.15); color: #fcd34d; border: 1px solid rgba(245,158,11,0.3); }
+  .badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+  /* ── NAV TABS ── */
+  .nav-tabs {
+    display: flex;
+    gap: 4px;
+    padding: 16px 48px;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    padding: 8px 20px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .tab-btn:hover { color: var(--text); border-color: var(--border); }
+  .tab-btn.active {
+    background: rgba(59,130,246,0.15);
+    color: #93c5fd;
+    border-color: rgba(59,130,246,0.35);
+  }
+
+  /* ── CONTENT ── */
+  .content { padding: 40px 48px; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; animation: fadeUp 0.35s ease; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+  .section-sub { color: var(--muted); font-size: 13px; margin-bottom: 28px; }
+
+  /* ── GRID ── */
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 24px; }
+  .grid-1-2 { display: grid; grid-template-columns: 1fr 2fr; gap: 16px; margin-bottom: 24px; }
+  .grid-2-1 { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 24px; }
+
+  @media (max-width: 1100px) {
+    .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 720px) {
+    .header, .nav-tabs, .content { padding-left: 20px; padding-right: 20px; }
+    .grid-4, .grid-3, .grid-2, .grid-1-2, .grid-2-1 { grid-template-columns: 1fr; }
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card-accent-line {
+    position: absolute;
+    top: 0; left: 24px; right: 24px;
+    height: 2px;
+    border-radius: 0 0 4px 4px;
+  }
+  .card-accent-line.blue { background: var(--grad1); }
+  .card-accent-line.purple { background: var(--grad2); }
+  .card-accent-line.gold { background: linear-gradient(90deg, #f59e0b, #fcd34d); }
+  .card-accent-line.green { background: linear-gradient(90deg, #10b981, #6ee7b7); }
+
+  .kpi-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .kpi-value {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    font-weight: 400;
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .kpi-value.big { font-size: 40px; }
+  .kpi-sub {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 2px 8px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .pill.green { background: rgba(16,185,129,0.15); color: #6ee7b7; }
+  .pill.red { background: rgba(239,68,68,0.15); color: #fca5a5; }
+  .pill.gold { background: rgba(245,158,11,0.15); color: #fcd34d; }
+
+  /* ── CHART CONTAINER ── */
+  .chart-wrap {
+    position: relative;
+    height: 260px;
+  }
+  .chart-wrap.tall { height: 320px; }
+  .chart-wrap.short { height: 200px; }
+
+  /* ── PROGRESS BAR ── */
+  .progress-item { margin-bottom: 14px; }
+  .progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .progress-label { font-size: 13px; color: var(--text); }
+  .progress-vals {
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .progress-track {
+    height: 6px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 100px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 100px;
+    transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* ── TABLE ── */
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; }
+  thead th {
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+  tbody td {
+    padding: 11px 14px;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  tbody tr:hover td { background: rgba(255,255,255,0.02); }
+  tbody tr:last-child td { border-bottom: none; }
+  .td-num { text-align: right; font-variant-numeric: tabular-nums; }
+  .td-bold { font-weight: 600; color: #fff; }
+
+  /* ── STATUS BADGE ── */
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 10px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .status.hit { background: rgba(16,185,129,0.15); color: #6ee7b7; }
+  .status.miss { background: rgba(239,68,68,0.15); color: #fca5a5; }
+  .status::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+
+  /* ── DIVIDER ── */
+  .divider { height: 1px; background: var(--border); margin: 32px 0; }
+
+  /* ── DONUT CENTER ── */
+  .donut-wrap { position: relative; }
+  .donut-center {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    pointer-events: none;
+  }
+  .donut-center-val {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: #fff;
+    line-height: 1;
+  }
+  .donut-center-lbl {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ── RANK LIST ── */
+  .rank-list { list-style: none; }
+  .rank-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .rank-item:last-child { border-bottom: none; }
+  .rank-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 14px;
+    color: var(--muted);
+    width: 20px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+  .rank-name { flex: 1; font-size: 13px; }
+  .rank-bar-wrap { width: 80px; }
+  .rank-bar {
+    height: 4px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 100px;
+    overflow: hidden;
+  }
+  .rank-bar-fill {
+    height: 100%;
+    border-radius: 100px;
+    background: var(--grad1);
+  }
+  .rank-val {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    text-align: right;
+    width: 80px;
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── INSIGHT BOX ── */
+  .insight {
+    background: rgba(59,130,246,0.06);
+    border: 1px solid rgba(59,130,246,0.2);
+    border-radius: 10px;
+    padding: 16px 20px;
+    font-size: 13px;
+    color: #93c5fd;
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+  .insight strong { color: #fff; }
+  .insight-icon { font-size: 16px; margin-right: 6px; }
+
+  .insight.warn {
+    background: rgba(245,158,11,0.06);
+    border-color: rgba(245,158,11,0.2);
+    color: #fcd34d;
+  }
+  .insight.success {
+    background: rgba(16,185,129,0.06);
+    border-color: rgba(16,185,129,0.2);
+    color: #6ee7b7;
+  }
+
+  /* ── LOGO / BRANDS ── */
+  .brand-chips {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .brand-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .chip-ox { background: rgba(59,130,246,0.15); color: #93c5fd; border: 1px solid rgba(59,130,246,0.3); }
+  .chip-pu { background: rgba(139,92,246,0.15); color: #c4b5fd; border: 1px solid rgba(139,92,246,0.3); }
+  .chip-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .chip-ox .chip-dot { background: #3b82f6; }
+  .chip-pu .chip-dot { background: #8b5cf6; }
+
+  /* ── FOOTER ── */
+  .footer {
+    padding: 24px 48px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-left { font-size: 12px; color: var(--muted); }
+  .footer-right { font-size: 11px; color: rgba(107,122,153,0.5); }
+
+  /* Responsive table font */
+  @media (max-width: 600px) {
+    thead th, tbody td { padding: 8px; font-size: 12px; }
+    .kpi-value { font-size: 26px; }
+    .kpi-value.big { font-size: 30px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-left">
+    <div class="eyebrow">Relatório Estratégico · 2026</div>
+    <h1>Grupo <em>Oxigenar</em> &<br>Pulmonair</h1>
+    <p class="header-sub">Equipamentos médicos · Locação &amp; Venda · Análise de desempenho 2023–2026</p>
+  </div>
+  <div class="badges">
+    <span class="badge badge-blue">Oxigenar</span>
+    <span class="badge badge-purple">Pulmonair</span>
+    <span class="badge badge-gold">Meta Ano: R$ 52,8 M</span>
+  </div>
+</header>
+
+<!-- TABS -->
+<nav class="nav-tabs">
+  <button class="tab-btn active" data-tab="visao">📊 Visão Geral</button>
+  <button class="tab-btn" data-tab="evolucao">📈 Evolução 2023–2026</button>
+  <button class="tab-btn" data-tab="metas">🎯 Metas 2026</button>
+  <button class="tab-btn" data-tab="lojas">🏪 Ranking Lojas</button>
+  <button class="tab-btn" data-tab="locacao">🫁 Locação</button>
+</nav>
+
+<!-- CONTENT -->
+<main class="content">
+
+  <!-- ━━━━━━━━━━━━━━ TAB: VISÃO GERAL ━━━━━━━━━━━━━━ -->
+  <section class="tab-panel active" id="tab-visao">
+
+    <div class="grid-4">
+      <div class="card">
+        <div class="card-accent-line blue"></div>
+        <div class="kpi-label">Realizado Q1 2026 · Grupo</div>
+        <div class="kpi-value big">R$ 10,0M</div>
+        <div class="kpi-sub">
+          <span class="pill gold">▶ Jan–Mar</span>
+          de R$ 52,8M meta ano
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-accent-line blue"></div>
+        <div class="kpi-label">Oxigenar · Q1 2026</div>
+        <div class="kpi-value">R$ 4,18M</div>
+        <div class="kpi-sub">
+          Jan + Fev + Mar 2026
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-accent-line purple"></div>
+        <div class="kpi-label">Pulmonair · Q1 2026</div>
+        <div class="kpi-value">R$ 2,76M</div>
+        <div class="kpi-sub">
+          Jan + Fev + Mar 2026
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-accent-line gold"></div>
+        <div class="kpi-label">Atingimento Meta Ano</div>
+        <div class="kpi-value">19,0%</div>
+        <div class="kpi-sub">
+          <span class="pill gold">Q1/4</span>
+          Trimestre 1 concluído
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-accent-line green"></div>
+        <div class="kpi-label">Crescimento Oxigenar 2023→2024</div>
+        <div class="kpi-value">+31,2%</div>
+        <div class="kpi-sub">De R$ 10,0M → R$ 13,2M</div>
+      </div>
+      <div class="card">
+        <div class="card-accent-line green"></div>
+        <div class="kpi-label">Crescimento Oxigenar 2024→2025</div>
+        <div class="kpi-value">+31,2%</div>
+        <div class="kpi-sub">De R$ 13,2M → R$ 17,3M</div>
+      </div>
+      <div class="card">
+        <div class="card-accent-line purple"></div>
+        <div class="kpi-label">Crescimento Pulmonair 2024→2025</div>
+        <div class="kpi-value">+61,3%</div>
+        <div class="kpi-sub">De R$ 5,2M → R$ 8,3M · Aceleração forte</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <!-- Faturamento Consolidado -->
+      <div class="card">
+        <div class="card-accent-line blue"></div>
+        <div class="kpi-label" style="margin-bottom:16px">Faturamento Consolidado Grupo · Por Ano</div>
+        <div class="chart-wrap">
+          <canvas id="chartConsolidado"></canvas>
+        </div>
+      </div>
+      <!-- Mix Receita Q1 -->
+      <div class="card">
+        <div class="card-accent-line purple"></div>
+        <div class="kpi-label" style="margin-bottom:16px">Mix de Receita Q1 2026 · Oxigenar vs Pulmonair</div>
+        <div class="donut-wrap">
+          <div class="chart-wrap" style="height:200px">
+            <canvas id="chartMix"></canvas>
+          </div>
+          <div class="donut-center">
+            <div class="donut-center-val">R$ 10M</div>
+            <div class="donut-center-lbl">Q1 Total</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:16px;justify-content:center;margin-top:16px;flex-wrap:wrap">
+          <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)">
+            <span style="width:10px;height:10px;border-radius:2px;background:#3b82f6;display:inline-block"></span>Oxigenar 60%
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)">
+            <span style="width:10px;height:10px;border-radius:2px;background:#8b5cf6;display:inline-block"></span>Pulmonair 40%
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Insights -->
+    <div class="grid-3">
+      <div class="insight success">
+        <span class="insight-icon">✅</span>
+        <strong>Pulmonair acelera forte:</strong> crescimento de 87,6% em 2024 e +61,3% em 2025, indicando consolidação rápida da marca no mercado de equipamentos domiciliares.
+      </div>
+      <div class="insight warn">
+        <span class="insight-icon">⚠️</span>
+        <strong>Meta ano ambiciosa:</strong> R$ 52,8M exige crescimento significativo. Com R$ 10M realizados no Q1, o ritmo precisa acelerar nos próximos trimestres.
+      </div>
+      <div class="insight">
+        <span class="insight-icon">💡</span>
+        <strong>Locação como âncora:</strong> receita recorrente de locação cresce consistentemente em ambas as empresas e deve ser priorizada para estabilidade de caixa.
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ━━━━━━━━━━━━━━ TAB: EVOLUÇÃO ━━━━━━━━━━━━━━ -->
+  <section class="tab-panel" id="tab-evolucao">
+    <p class="section-title">Evolução histórica 2023 → 2026</p>
+    <p class="section-sub">Comparativo anual de faturamento geral por empresa, mês a mês</p>
+
+    <div class="brand-chips">
+      <div class="brand-chip chip-ox"><span class="chip-dot"></span>Oxigenar</div>
+      <div class="brand-chip chip-pu"><span class="chip-dot"></span>Pulmonair</div>
+    </div>
+
+    <div class="card" style="margin-bottom:20px">
+      <div class="kpi-label" style="margin-bottom:16px">Oxigenar · Resultado Geral Mensal (R$)</div>
+      <div class="chart-wrap tall">
+        <canvas id="chartOxMensal"></canvas>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:20px">
+      <div class="kpi-label" style="margin-bottom:16px">Pulmonair · Resultado Geral Mensal (R$)</div>
+      <div class="chart-wrap tall">
+        <canvas id="chartPuMensal"></canvas>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="kpi-label" style="margin-bottom:16px">Taxa de Crescimento Anual · Oxigenar (%)</div>
+        <div class="chart-wrap">
+          <canvas id="chartOxGrowth"></canvas>
+        </div>
+      </div>
+      <div class="card">
+        <div class="kpi-label" style="margin-bottom:16px">Taxa de Crescimento Anual · Pulmonair (%)</div>
+        <div class="chart-wrap">
+          <canvas id="chartPuGrowth"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabela comparativa -->
+    <div class="card">
+      <div class="kpi-label" style="margin-bottom:16px">Tabela Comparativa Anual (R$)</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Mês</th>
+              <th class="td-num">Ox. 2023</th>
+              <th class="td-num">Ox. 2024</th>
+              <th class="td-num">Cresc. %</th>
+              <th class="td-num">Ox. 2025</th>
+              <th class="td-num">Cresc. %</th>
+              <th class="td-num">Pu. 2023</th>
+              <th class="td-num">Pu. 2024</th>
+              <th class="td-num">Cresc. %</th>
+              <th class="td-num">Pu. 2025</th>
+              <th class="td-num">Cresc. %</th>
+            </tr>
+          </thead>
+          <tbody id="tabelaAnual"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ━━━━━━━━━━━━━━ TAB: METAS ━━━━━━━━━━━━━━ -->
+  <section class="tab-panel" id="tab-metas">
+    <p class="section-title">Plano de Metas 2026</p>
+    <p class="section-sub">Composição da meta anual do grupo e atingimento do Q1 por empresa</p>
+
+    <div class="grid-4">
+      <div class="card">
+        <div class="card-accent-line gold"></div>
+        <div class="kpi-label">Meta Ano Grupo</div>
+        <div class="kpi-value big">R$ 52,8M</div>
+        <div class="kpi-sub">Total consolidado 2026</div>
+      </div>
+      <div class="card">
+        <div class="card-accent-line blue"></div>
+        <div class="kpi-label">24 Lojas B2C</div>
+        <div class="kpi-value">R$ 32,6M</div>
+        <div class="kpi-sub">61,8% da meta ano</div>
+      </div>
+      <div class="card">
+        <div class="card-accent-line purple"></div>
+        <div class="kpi-label">B2B</div>
+        <div class="kpi-value">R$ 9,0M</div>
+        <div class="kpi-sub">17,0% da meta ano</div>
+      </div>
+      <div class="card">
+        <div class="card-accent-line green"></div>
+        <div class="kpi-label">Liq. + Novas + Outros</div>
+        <div class="kpi-value">R$ 11,2M</div>
+        <div class="kpi-sub">Liquidados, novas lojas, O2, AT</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:20px">
+      <div class="kpi-label" style="margin-bottom:16px">Composição da Meta 2026 · Participação por Segmento</div>
+      <div class="chart-wrap" style="height:280px">
+        <canvas id="chartMetas"></canvas>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-accent-line blue"></div>
+        <div class="kpi-label" style="margin-bottom:20px">Atingimento de Meta Q1 · Oxigenar (Geral)</div>
+        <div id="progressOx"></div>
+      </div>
+      <div class="card">
+        <div class="card-accent-line purple"></div>
+        <div class="kpi-label" style="margin-bottom:20px">Atingimento de Meta Q1 · Pulmonair (Geral)</div>
+        <div id="progressPu"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="kpi-label" style="margin-bottom:16px">Resultado vs Meta por Mês Q1 2026 · Grupo</div>
+      <div class="chart-wrap tall">
+        <canvas id="chartMetaVsReal"></canvas>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="insight success">
+        <span class="insight-icon">☑️</span>
+        <strong>Meses que bateram meta Geral (Jan–Mar):</strong> Pulmonair bateu meta em Março. Locação do grupo bateu meta nos 3 meses (Janeiro, Fevereiro e Março).
+      </div>
+      <div class="insight warn">
+        <span class="insight-icon">⮽</span>
+        <strong>Atenção:</strong> Oxigenar ficou abaixo da meta geral nos 3 meses de Q1. O reforço em vendas B2B e liquidados pode compensar no próximo trimestre.
+      </div>
+    </div>
+  </section>
+
+  <!-- ━━━━━━━━━━━━━━ TAB: LOJAS ━━━━━━━━━━━━━━ -->
+  <section class="tab-panel" id="tab-lojas">
+    <p class="section-title">Ranking de Lojas · Acumulado 2026</p>
+    <p class="section-sub">Resultado Geral e Locação — todas as lojas B2C do grupo</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-accent-line blue"></div>
+        <div class="kpi-label" style="margin-bottom:20px">🏆 Top 10 · Resultado Geral (R$)</div>
+        <ul class="rank-list" id="rankGeral"></ul>
+      </div>
+      <div class="card">
+        <div class="card-accent-line green"></div>
+        <div class="kpi-label" style="margin-bottom:20px">🏆 Top 10 · Resultado Locação (R$)</div>
+        <ul class="rank-list" id="rankLocacao"></ul>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:20px">
+      <div class="kpi-label" style="margin-bottom:16px">Resultado Geral por Loja · 2026 (R$)</div>
+      <div class="chart-wrap" style="height:340px">
+        <canvas id="chartLojas"></canvas>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="kpi-label" style="margin-bottom:16px">Tabela Completa · Todas as Lojas</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Loja</th>
+              <th class="td-num">Resultado Geral</th>
+              <th class="td-num">Resultado Locação</th>
+              <th class="td-num">% Locação / Geral</th>
+            </tr>
+          </thead>
+          <tbody id="tabelaLojas"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ━━━━━━━━━━━━━━ TAB: LOCAÇÃO ━━━━━━━━━━━━━━ -->
+  <section class="tab-panel" id="tab-locacao">
+    <p class="section-title">Resultado de Locação · Análise Detalhada</p>
+    <p class="section-sub">Receita recorrente de locação de equipamentos médicos por empresa e ano</p>
+
+    <div class="grid-4">
+      <div class="card">
+        <div class="card-accent-line blue"></div>
+        <div class="kpi-label">Locação Oxigenar 2025</div>
+        <div class="kpi-value">R$ 5,2M</div>
+        <div class="kpi-sub"><span class="pill green">+27,9%</span> vs 2024</div>
+      </div>
+      <div class="card">
+        <div class="card-accent-line purple"></div>
+        <div class="kpi-label">Locação Pulmonair 2025</div>
+        <div class="kpi-value">R$ 2,7M</div>
+        <div class="kpi-sub"><span class="pill green">+25,8%</span> vs 2024</div>
+      </div>
+      <div class="card">
+        <div class="card-accent-line blue"></div>
+        <div class="kpi-label">Locação Ox. Q1 2026</div>
+        <div class="kpi-value">R$ 1,44M</div>
+        <div class="kpi-sub">Jan + Fev + Mar</div>
+      </div>
+      <div class="card">
+        <div class="card-accent-line purple"></div>
+        <div class="kpi-label">Locação Pu. Q1 2026</div>
+        <div class="kpi-value">R$ 1,04M</div>
+        <div class="kpi-sub">Jan + Fev + Mar</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="kpi-label" style="margin-bottom:16px">Locação Oxigenar · Mensal por Ano (R$)</div>
+        <div class="chart-wrap tall">
+          <canvas id="chartLocOx"></canvas>
+        </div>
+      </div>
+      <div class="card">
+        <div class="kpi-label" style="margin-bottom:16px">Locação Pulmonair · Mensal por Ano (R$)</div>
+        <div class="chart-wrap tall">
+          <canvas id="chartLocPu"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:20px">
+      <div class="kpi-label" style="margin-bottom:16px">% Locação sobre Receita Total · Por Empresa e Ano</div>
+      <div class="chart-wrap">
+        <canvas id="chartLocPerc"></canvas>
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <div class="insight success">
+        <span class="insight-icon">📈</span>
+        <strong>Locação Pulmonair</strong> saltou de R$ 1,1M (2023) para R$ 2,7M (2025) — crescimento de 136%. Produto estratégico em expansão.
+      </div>
+      <div class="insight">
+        <span class="insight-icon">💡</span>
+        <strong>Locação Oxigenar</strong> representa ~30% da receita total em 2025. Manter este patamar garante previsibilidade de caixa e menor dependência de vendas.
+      </div>
+      <div class="insight warn">
+        <span class="insight-icon">🎯</span>
+        Meta locação grupo 2026: <strong>R$ 728.500/mês</strong>. Meta geral grupo: <strong>R$ 2.718.000/mês</strong>. Locação já bate meta nos 3 meses de Q1.
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-left">Grupo Oxigenar &amp; Pulmonair · Dashboard Estratégico 2026</div>
+  <div class="footer-right">Dados extraídos da planilha Estrategico.xlsx</div>
+</footer>
+
+</div><!-- .wrapper -->
+
+<script>
+// ━━━━━━━━━━━━━━━━━━ DATA ━━━━━━━━━━━━━━━━━━
+const MESES = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+
+// OXIGENAR - Resultado Geral
+const ox = {
+  2023: [875698.94, 654234.80, 835612.27, 719098.33, 834197.18, 860199.80, 869255.59, 912312.10, 674923.23, 922475.25, 841306.00, 1028193.82],
+  2024: [883985.13, 786069.37, 956028.53, 909490.22, 1046494.17, 1051037.45, 1158229.74, 1306390.70, 1229319.82, 1370598.44, 1243422.21, 1219906.86],
+  2025: [1269452.26, 1311130.44, 1082924.68, 1227366.95, 1615796.75, 1367010.25, 1845521.02, 1611161.13, 1280608.70, 1653320.73, 1582621.57, 1419497.72],
+  2026: [1473848.60, 1132194.20, 1572774.97]
+};
+// PULMONAIR - Resultado Geral
+const pu = {
+  2023: [160204.00, 114135.00, 241257.00, 175297.45, 262790.00, 239074.00, 199128.00, 270410.00, 241981.80, 237858.00, 304396.00, 288005.00],
+  2024: [300250.00, 334117.50, 456926.00, 455116.80, 338159.50, 392663.00, 418535.50, 489061.10, 466793.01, 566346.80, 424729.00, 525791.51],
+  2025: [541621.00, 592255.83, 515842.61, 562232.53, 575597.54, 660573.80, 754391.39, 828410.42, 731682.50, 842901.02, 831769.27, 901440.30],
+  2026: [818735.60, 849322.32, 1091961.40]
+};
+// Locação Oxigenar
+const locOx = {
+  2023: [319216.70, 235499.50, 261687.25, 200593.35, 297904.40, 250654.80, 244664.65, 245685.60, 206987.23, 233278.70, 235316.80, 341371.60],
+  2024: [294310.50, 221624.30, 263745.63, 278991.00, 364653.40, 313490.50, 353014.65, 380055.24, 345745.86, 442826.25, 383382.21, 430103.02],
+  2025: [441007.75, 352719.79, 362071.14, 435277.46, 545324.58, 369492.03, 497775.81, 476941.01, 457277.35, 461376.67, 370215.82, 440411.37],
+  2026: [470237.36, 393225.22, 580426.29]
+};
+// Locação Pulmonair
+const locPu = {
+  2023: [54234.00, 72555.00, 107950.00, 93645.00, 138670.00, 104319.00, 72190.00, 102610.00, 118558.80, 101990.00, 93991.00, 88520.00],
+  2024: [113845.00, 146920.00, 274170.00, 243588.80, 158560.00, 151034.00, 151050.00, 183210.30, 183433.40, 201088.80, 156535.00, 194590.00],
+  2025: [196960.00, 177449.00, 169430.00, 198695.00, 220778.80, 243438.80, 238165.00, 242732.60, 216750.00, 219915.80, 210868.80, 380016.80],
+  2026: [276049.00, 337173.00, 439626.40]
+};
+
+// Lojas B2C
+const lojas = [
+  {nome:'Barra da Tijuca', geral:548140.92, loc:216478.8},
+  {nome:'Domiciliar RJ', geral:516492, loc:144369},
+  {nome:'Tatuapé', geral:478190.8, loc:157588.8},
+  {nome:'Tijuca', geral:471954.6, loc:186425.2},
+  {nome:'Domiciliar SP', geral:455008, loc:130370},
+  {nome:'Botafogo', geral:383257.8, loc:124640},
+  {nome:'Santana', geral:368371.48, loc:82628.8},
+  {nome:'Morumbi', geral:333931.14, loc:145640},
+  {nome:'Volta Redonda', geral:333467.35, loc:120841.37},
+  {nome:'Guarulhos', geral:306905, loc:197912},
+  {nome:'Recreio', geral:291983.91, loc:89948.9},
+  {nome:'Niterói', geral:270202, loc:98359},
+  {nome:'Saúde', geral:261947.3, loc:84878},
+  {nome:'Belo Horizonte', geral:254928.8, loc:60318.8},
+  {nome:'Itaim', geral:235368.8, loc:58009},
+  {nome:'Copacabana', geral:229153.6, loc:90445},
+  {nome:'Porto Alegre', geral:223581.16, loc:80096.4},
+  {nome:'Curitiba', geral:221285.6, loc:106187.6},
+  {nome:'Osasco', geral:193640.8, loc:105356.8},
+  {nome:'Jardim Botanico', geral:165582, loc:53210},
+  {nome:'São Caetano', geral:128755, loc:71840},
+  {nome:'Salvador', geral:100990.4, loc:26298.8},
+  {nome:'Juiz de Fora', geral:98722, loc:18280},
+  {nome:'Nova Iguaçu', geral:56665, loc:26800},
+];
+
+// Metas Q1 2026 grupo (resultado geral)
+const metasGeral = { jan: 2718000, fev: 2718000, mar: 2718000 };
+const realizadoGeral = { jan: 2286812.55, fev: 1927045.51, mar: 2636037.40 };
+// Metas Q1 locação
+const metasLoc = { jan: 728500, fev: 728500, mar: 728500 };
+const realizadoLoc = { jan: 735386.36, fev: 728958.22, mar: 1020372.69 };
+
+// Metas por empresa Q1
+const metaOx = {jan:1783000, fev:1783000, mar:1783000};
+const realizOx = {jan:1468076.95, fev:1121409.19, mar:1544076.00};
+const metaPu = {jan:935000, fev:935000, mar:935000};
+const realizPu = {jan:818735.60, fev:805636.32, mar:1091961.40};
+
+// ━━━━━━━━━━━━━━━━━━ HELPERS ━━━━━━━━━━━━━━━━━━
+const fmt = v => 'R$ ' + (v/1000).toFixed(0) + 'K';
+const fmtM = v => 'R$ ' + (v/1e6).toFixed(2) + 'M';
+const pct = v => (v*100).toFixed(1) + '%';
+const sum = arr => arr.reduce((a,b)=>a+b,0);
+const colorAlpha = (hex, a) => hex + Math.round(a*255).toString(16).padStart(2,'0');
+
+const CHART_DEFAULTS = {
+  color: '#6b7a99',
+  borderColor: 'rgba(255,255,255,0.07)',
+  plugins: {
+    legend: { labels: { color: '#6b7a99', font: { family: 'DM Sans', size: 12 }, boxWidth: 12, padding: 16 } },
+    tooltip: {
+      backgroundColor: '#1a2236',
+      borderColor: 'rgba(255,255,255,0.1)',
+      borderWidth: 1,
+      titleColor: '#e8edf5',
+      bodyColor: '#6b7a99',
+      padding: 12,
+    }
+  },
+  scales: {
+    x: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#6b7a99', font: { family: 'DM Sans', size: 11 } } },
+    y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#6b7a99', font: { family: 'DM Sans', size: 11 }, callback: v => fmt(v) } }
+  }
+};
+
+function mergeDeep(target, source) {
+  const out = Object.assign({}, target);
+  for (const k in source) {
+    if (source[k] && typeof source[k] === 'object' && !Array.isArray(source[k])) {
+      out[k] = mergeDeep(target[k] || {}, source[k]);
+    } else { out[k] = source[k]; }
+  }
+  return out;
+}
+
+function mkLine(ctx, datasets, opts={}) {
+  return new Chart(ctx, {
+    type: 'line',
+    data: { labels: MESES, datasets },
+    options: mergeDeep(JSON.parse(JSON.stringify(CHART_DEFAULTS)), {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: { legend: { position: 'top' } },
+      ...opts
+    })
+  });
+}
+function mkBar(ctx, labels, datasets, opts={}) {
+  return new Chart(ctx, {
+    type: 'bar',
+    data: { labels, datasets },
+    options: mergeDeep(JSON.parse(JSON.stringify(CHART_DEFAULTS)), {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top' } },
+      ...opts
+    })
+  });
+}
+
+// ━━━━━━━━━━━━━━━━━━ TABS ━━━━━━━━━━━━━━━━━━
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+// ━━━━━━━━━━━━━━━━━━ CHART: Consolidado ━━━━━━━━━━━━━━━━━━
+(function() {
+  const totais = {
+    2023: sum(ox[2023]) + sum(pu[2023]),
+    2024: sum(ox[2024]) + sum(pu[2024]),
+    2025: sum(ox[2025]) + sum(pu[2025]),
+  };
+  const ctx = document.getElementById('chartConsolidado').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['2023','2024','2025','Q1 2026 (parcial)'],
+      datasets: [
+        {
+          label: 'Oxigenar',
+          data: [sum(ox[2023]), sum(ox[2024]), sum(ox[2025]), sum(ox[2026])],
+          backgroundColor: 'rgba(59,130,246,0.75)',
+          borderRadius: 6,
+        },
+        {
+          label: 'Pulmonair',
+          data: [sum(pu[2023]), sum(pu[2024]), sum(pu[2025]), sum(pu[2026])],
+          backgroundColor: 'rgba(139,92,246,0.75)',
+          borderRadius: 6,
+        }
+      ]
+    },
+    options: mergeDeep(JSON.parse(JSON.stringify(CHART_DEFAULTS)), {
+      responsive: true, maintainAspectRatio: false,
+      scales: { x: { stacked: true }, y: { stacked: true, ticks: { callback: v => fmtM(v) } } },
+      plugins: { legend: { position: 'top' } }
+    })
+  });
+})();
+
+// ━━━━━━━━━━━━━━━━━━ CHART: Mix Donut ━━━━━━━━━━━━━━━━━━
+(function() {
+  const totalOx = sum(ox[2026]);
+  const totalPu = sum(pu[2026]);
+  const ctx = document.getElementById('chartMix').getContext('2d');
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Oxigenar', 'Pulmonair'],
+      datasets: [{
+        data: [totalOx, totalPu],
+        backgroundColor: ['rgba(59,130,246,0.8)', 'rgba(139,92,246,0.8)'],
+        borderColor: ['#3b82f6', '#8b5cf6'],
+        borderWidth: 2,
+        hoverOffset: 8,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      cutout: '65%',
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1a2236',
+          borderColor: 'rgba(255,255,255,0.1)', borderWidth: 1,
+          titleColor: '#e8edf5', bodyColor: '#6b7a99', padding: 12,
+          callbacks: { label: ctx => ' ' + fmtM(ctx.parsed) }
+        }
+      }
+    }
+  });
+})();
+
+// ━━━━━━━━━━━━━━━━━━ CHART: Oxigenar Mensal ━━━━━━━━━━━━━━━━━━
+(function() {
+  const ctx = document.getElementById('chartOxMensal').getContext('2d');
+  mkLine(ctx, [
+    { label:'2023', data: ox[2023], borderColor:'#475569', backgroundColor:'rgba(71,85,105,0.05)', tension:0.4, pointRadius:3, borderWidth:2 },
+    { label:'2024', data: ox[2024], borderColor:'#60a5fa', backgroundColor:'rgba(96,165,250,0.08)', tension:0.4, pointRadius:3, borderWidth:2 },
+    { label:'2025', data: ox[2025], borderColor:'#3b82f6', backgroundColor:'rgba(59,130,246,0.12)', tension:0.4, pointRadius:3, borderWidth:2.5, fill:true },
+    { label:'2026 (Q1)', data: [...ox[2026], ...Array(9).fill(null)], borderColor:'#06b6d4', backgroundColor:'rgba(6,182,212,0.15)', tension:0.4, pointRadius:5, borderWidth:3, borderDash:[6,3] },
+  ]);
+})();
+
+// ━━━━━━━━━━━━━━━━━━ CHART: Pulmonair Mensal ━━━━━━━━━━━━━━━━━━
+(function() {
+  const ctx = document.getElementById('chartPuMensal').getContext('2d');
+  mkLine(ctx, [
+    { label:'2023', data: pu[2023], borderColor:'#475569', backgroundColor:'rgba(71,85,105,0.05)', tension:0.4, pointRadius:3, borderWidth:2 },
+    { label:'2024', data: pu[2024], borderColor:'#a78bfa', backgroundColor:'rgba(167,139,250,0.08)', tension:0.4, pointRadius:3, borderWidth:2 },
+    { label:'2025', data: pu[2025], borderColor:'#8b5cf6', backgroundColor:'rgba(139,92,246,0.12)', tension:0.4, pointRadius:3, borderWidth:2.5, fill:true },
+    { label:'2026 (Q1)', data: [...pu[2026], ...Array(9).fill(null)], borderColor:'#ec4899', backgroundColor:'rgba(236,72,153,0.1)', tension:0.4, pointRadius:5, borderWidth:3, borderDash:[6,3] },
+  ]);
+})();
+
+// ━━━━━━━━━━━━━━━━━━ CHART: Crescimento Mensal ━━━━━━━━━━━━━━━━━━
+(function() {
+  const growthOx24 = ox[2023].map((v,i) => ((ox[2024][i]-v)/v*100).toFixed(1)*1);
+  const growthOx25 = ox[2024].map((v,i) => ((ox[2025][i]-v)/v*100).toFixed(1)*1);
+  const ctx = document.getElementById('chartOxGrowth').getContext('2d');
+  mkBar(ctx, MESES, [
+    { label:'2023→2024', data: growthOx24, backgroundColor:'rgba(96,165,250,0.7)', borderRadius:4 },
+    { label:'2024→2025', data: growthOx25, backgroundColor:'rgba(59,130,246,0.7)', borderRadius:4 },
+  ], { scales: { y: { ticks: { callback: v => v+'%' } } } });
+})();
+(function() {
+  const growthPu24 = pu[2023].map((v,i) => ((pu[2024][i]-v)/v*100).toFixed(1)*1);
+  const growthPu25 = pu[2024].map((v,i) => ((pu[2025][i]-v)/v*100).toFixed(1)*1);
+  const ctx = document.getElementById('chartPuGrowth').getContext('2d');
+  mkBar(ctx, MESES, [
+    { label:'2023→2024', data: growthPu24, backgroundColor:'rgba(167,139,250,0.7)', borderRadius:4 },
+    { label:'2024→2025', data: growthPu25, backgroundColor:'rgba(139,92,246,0.7)', borderRadius:4 },
+  ], { scales: { y: { ticks: { callback: v => v+'%' } } } });
+})();
+
+// ━━━━━━━━━━━━━━━━━━ TABELA ANUAL ━━━━━━━━━━━━━━━━━━
+(function() {
+  const tbody = document.getElementById('tabelaAnual');
+  MESES.forEach((m,i) => {
+    const g24 = ((ox[2024][i]-ox[2023][i])/ox[2023][i]*100).toFixed(1);
+    const g25 = ((ox[2025][i]-ox[2024][i])/ox[2024][i]*100).toFixed(1);
+    const p24 = ((pu[2024][i]-pu[2023][i])/pu[2023][i]*100).toFixed(1);
+    const p25 = ((pu[2025][i]-pu[2024][i])/pu[2024][i]*100).toFixed(1);
+    const row = `<tr>
+      <td class="td-bold">${m}</td>
+      <td class="td-num">${fmt(ox[2023][i])}</td>
+      <td class="td-num">${fmt(ox[2024][i])}</td>
+      <td class="td-num"><span class="pill ${g24>=0?'green':'red'}">${g24>=0?'+':''}${g24}%</span></td>
+      <td class="td-num">${fmt(ox[2025][i])}</td>
+      <td class="td-num"><span class="pill ${g25>=0?'green':'red'}">${g25>=0?'+':''}${g25}%</span></td>
+      <td class="td-num">${fmt(pu[2023][i])}</td>
+      <td class="td-num">${fmt(pu[2024][i])}</td>
+      <td class="td-num"><span class="pill ${p24>=0?'green':'red'}">${p24>=0?'+':''}${p24}%</span></td>
+      <td class="td-num">${fmt(pu[2025][i])}</td>
+      <td class="td-num"><span class="pill ${p25>=0?'green':'red'}">${p25>=0?'+':''}${p25}%</span></td>
+    </tr>`;
+    tbody.innerHTML += row;
+  });
+  // totals
+  const row = `<tr style="border-top:1px solid rgba(255,255,255,0.1)">
+    <td class="td-bold" style="color:#fff">TOTAL</td>
+    <td class="td-num td-bold">${fmtM(sum(ox[2023]))}</td>
+    <td class="td-num td-bold">${fmtM(sum(ox[2024]))}</td>
+    <td class="td-num"><span class="pill green">+31,2%</span></td>
+    <td class="td-num td-bold">${fmtM(sum(ox[2025]))}</td>
+    <td class="td-num"><span class="pill green">+31,2%</span></td>
+    <td class="td-num td-bold">${fmtM(sum(pu[2023]))}</td>
+    <td class="td-num td-bold">${fmtM(sum(pu[2024]))}</td>
+    <td class="td-num"><span class="pill green">+89,0%</span></td>
+    <td class="td-num td-bold">${fmtM(sum(pu[2025]))}</td>
+    <td class="td-num"><span class="pill green">+61,3%</span></td>
+  </tr>`;
+  tbody.innerHTML += row;
+})();
+
+// ━━━━━━━━━━━━━━━━━━ CHART: Composição Metas ━━━━━━━━━━━━━━━━━━
+(function() {
+  const ctx = document.getElementById('chartMetas').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['24 Lojas B2C','B2B','Liq. Pulmonair','Liq. Oxigenar','Nova Loja 1','Nova Loja 2','Nova Loja 3','Nova Loja 4','Ass. Técnica','O2 Brasil'],
+      datasets: [{
+        data: [32616000, 9000000, 1680000, 5655507.35, 840000, 840000, 840000, 840000, 120000, 360000],
+        backgroundColor: [
+          'rgba(59,130,246,0.8)','rgba(6,182,212,0.8)',
+          'rgba(139,92,246,0.8)','rgba(139,92,246,0.6)',
+          'rgba(16,185,129,0.7)','rgba(16,185,129,0.6)','rgba(16,185,129,0.5)','rgba(16,185,129,0.4)',
+          'rgba(245,158,11,0.7)','rgba(245,158,11,0.6)',
+        ],
+        borderRadius: 6,
+      }]
+    },
+    options: mergeDeep(JSON.parse(JSON.stringify(CHART_DEFAULTS)), {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ' ' + fmtM(ctx.parsed.y) } } },
+      scales: { x: { ticks: { maxRotation: 35, minRotation: 20 } }, y: { ticks: { callback: v => fmtM(v) } } }
+    })
+  });
+})();
+
+// ━━━━━━━━━━━━━━━━━━ PROGRESS BARS ━━━━━━━━━━━━━━━━━━
+function mkProgress(containerId, items) {
+  const el = document.getElementById(containerId);
+  const max = Math.max(...items.map(i=>i.meta));
+  el.innerHTML = items.map(item => {
+    const pct = Math.min((item.real/item.meta)*100, 100).toFixed(0);
+    const hit = item.real >= item.meta;
+    const color = hit ? '#10b981' : '#ef4444';
+    const grad = hit ? 'linear-gradient(90deg, #10b981, #6ee7b7)' : 'linear-gradient(90deg, #ef4444, #fca5a5)';
+    return `<div class="progress-item">
+      <div class="progress-header">
+        <span class="progress-label">${item.label}</span>
+        <span class="progress-vals">${fmtM(item.real)} / ${fmtM(item.meta)} &nbsp; <span class="status ${hit?'hit':'miss'}">${hit?'Bateu':'Não bateu'}</span></span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" style="width:${pct}%;background:${grad}"></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+mkProgress('progressOx', [
+  {label:'Janeiro', real:realizOx.jan, meta:metaOx.jan},
+  {label:'Fevereiro', real:realizOx.fev, meta:metaOx.fev},
+  {label:'Março', real:realizOx.mar, meta:metaOx.mar},
+]);
+mkProgress('progressPu', [
+  {label:'Janeiro', real:realizPu.jan, meta:metaPu.jan},
+  {label:'Fevereiro', real:realizPu.fev, meta:metaPu.fev},
+  {label:'Março', real:realizPu.mar, meta:metaPu.mar},
+]);
+
+// ━━━━━━━━━━━━━━━━━━ CHART: Meta vs Real ━━━━━━━━━━━━━━━━━━
+(function() {
+  const ctx = document.getElementById('chartMetaVsReal').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Jan · Geral','Jan · Locação','Fev · Geral','Fev · Locação','Mar · Geral','Mar · Locação'],
+      datasets: [
+        {
+          label: 'Meta',
+          data: [metasGeral.jan, metasLoc.jan, metasGeral.fev, metasLoc.fev, metasGeral.mar, metasLoc.mar],
+          backgroundColor: 'rgba(255,255,255,0.08)',
+          borderColor: 'rgba(255,255,255,0.2)',
+          borderWidth: 1,
+          borderRadius: 6,
+        },
+        {
+          label: 'Realizado',
+          data: [realizadoGeral.jan, realizadoLoc.jan, realizadoGeral.fev, realizadoLoc.fev, realizadoGeral.mar, realizadoLoc.mar],
+          backgroundColor: [
+            'rgba(239,68,68,0.7)','rgba(16,185,129,0.7)',
+            'rgba(239,68,68,0.7)','rgba(16,185,129,0.7)',
+            'rgba(239,68,68,0.7)','rgba(16,185,129,0.7)',
+          ],
+          borderRadius: 6,
+        }
+      ]
+    },
+    options: mergeDeep(JSON.parse(JSON.stringify(CHART_DEFAULTS)), {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: ctx => ' ' + fmtM(ctx.parsed.y) } } },
+      scales: { y: { ticks: { callback: v => fmtM(v) } } }
+    })
+  });
+})();
+
+// ━━━━━━━━━━━━━━━━━━ RANKING LOJAS ━━━━━━━━━━━━━━━━━━
+(function() {
+  const maxG = lojas[0].geral;
+  const maxL = Math.max(...lojas.map(l=>l.loc));
+
+  const rankGeral = document.getElementById('rankGeral');
+  lojas.slice(0,10).forEach((l,i) => {
+    rankGeral.innerHTML += `<li class="rank-item">
+      <span class="rank-num">${i+1}</span>
+      <span class="rank-name">${l.nome}</span>
+      <div class="rank-bar-wrap">
+        <div class="rank-bar"><div class="rank-bar-fill" style="width:${(l.geral/maxG*100).toFixed(0)}%"></div></div>
+      </div>
+      <span class="rank-val">${fmt(l.geral)}</span>
+    </li>`;
+  });
+
+  const sorted = [...lojas].sort((a,b)=>b.loc-a.loc);
+  const rankLocacao = document.getElementById('rankLocacao');
+  sorted.slice(0,10).forEach((l,i) => {
+    rankLocacao.innerHTML += `<li class="rank-item">
+      <span class="rank-num">${i+1}</span>
+      <span class="rank-name">${l.nome}</span>
+      <div class="rank-bar-wrap">
+        <div class="rank-bar"><div class="rank-bar-fill" style="width:${(l.loc/maxL*100).toFixed(0)}%;background:var(--grad2)"></div></div>
+      </div>
+      <span class="rank-val">${fmt(l.loc)}</span>
+    </li>`;
+  });
+})();
+
+// ━━━━━━━━━━━━━━━━━━ CHART: Lojas Bar ━━━━━━━━━━━━━━━━━━
+(function() {
+  const ctx = document.getElementById('chartLojas').getContext('2d');
+  mkBar(ctx, lojas.map(l=>l.nome), [
+    { label:'Resultado Geral', data: lojas.map(l=>l.geral), backgroundColor:'rgba(59,130,246,0.7)', borderRadius:4 },
+    { label:'Locação', data: lojas.map(l=>l.loc), backgroundColor:'rgba(6,182,212,0.6)', borderRadius:4 },
+  ], { scales: { x: { ticks: { maxRotation: 45, minRotation: 30, font:{size:11} } }, y: { ticks: { callback: v => fmt(v) } } } });
+})();
+
+// ━━━━━━━━━━━━━━━━━━ TABELA LOJAS ━━━━━━━━━━━━━━━━━━
+(function() {
+  const tbody = document.getElementById('tabelaLojas');
+  lojas.forEach((l,i) => {
+    const locPct = (l.loc/l.geral*100).toFixed(1);
+    tbody.innerHTML += `<tr>
+      <td style="color:var(--muted)">${i+1}</td>
+      <td class="td-bold">${l.nome}</td>
+      <td class="td-num">${fmtM(l.geral)}</td>
+      <td class="td-num">${fmtM(l.loc)}</td>
+      <td class="td-num"><span class="pill ${locPct>=35?'green':'gold'}">${locPct}%</span></td>
+    </tr>`;
+  });
+})();
+
+// ━━━━━━━━━━━━━━━━━━ CHARTS LOCAÇÃO ━━━━━━━━━━━━━━━━━━
+(function() {
+  const ctx = document.getElementById('chartLocOx').getContext('2d');
+  mkLine(ctx, [
+    { label:'2023', data: locOx[2023], borderColor:'#475569', tension:0.4, pointRadius:3, borderWidth:2 },
+    { label:'2024', data: locOx[2024], borderColor:'#60a5fa', tension:0.4, pointRadius:3, borderWidth:2 },
+    { label:'2025', data: locOx[2025], borderColor:'#3b82f6', backgroundColor:'rgba(59,130,246,0.1)', tension:0.4, fill:true, pointRadius:3, borderWidth:2.5 },
+    { label:'2026 (Q1)', data: [...locOx[2026], ...Array(9).fill(null)], borderColor:'#06b6d4', tension:0.4, pointRadius:5, borderWidth:3, borderDash:[5,3] },
+  ]);
+})();
+(function() {
+  const ctx = document.getElementById('chartLocPu').getContext('2d');
+  mkLine(ctx, [
+    { label:'2023', data: locPu[2023], borderColor:'#475569', tension:0.4, pointRadius:3, borderWidth:2 },
+    { label:'2024', data: locPu[2024], borderColor:'#a78bfa', tension:0.4, pointRadius:3, borderWidth:2 },
+    { label:'2025', data: locPu[2025], borderColor:'#8b5cf6', backgroundColor:'rgba(139,92,246,0.1)', tension:0.4, fill:true, pointRadius:3, borderWidth:2.5 },
+    { label:'2026 (Q1)', data: [...locPu[2026], ...Array(9).fill(null)], borderColor:'#ec4899', tension:0.4, pointRadius:5, borderWidth:3, borderDash:[5,3] },
+  ]);
+})();
+
+// ━━━━━━━━━━━━━━━━━━ CHART: % Locação ━━━━━━━━━━━━━━━━━━
+(function() {
+  const pctLocOx = [2023,2024,2025].map(y => (sum(locOx[y])/sum(ox[y])*100).toFixed(1)*1);
+  const pctLocPu = [2023,2024,2025].map(y => (sum(locPu[y])/sum(pu[y])*100).toFixed(1)*1);
+  const ctx = document.getElementById('chartLocPerc').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['2023','2024','2025'],
+      datasets: [
+        { label:'% Locação Oxigenar', data: pctLocOx, borderColor:'#3b82f6', backgroundColor:'rgba(59,130,246,0.1)', tension:0.4, fill:true, pointRadius:6, borderWidth:2.5 },
+        { label:'% Locação Pulmonair', data: pctLocPu, borderColor:'#8b5cf6', backgroundColor:'rgba(139,92,246,0.1)', tension:0.4, fill:true, pointRadius:6, borderWidth:2.5 },
+      ]
+    },
+    options: mergeDeep(JSON.parse(JSON.stringify(CHART_DEFAULTS)), {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: ctx => ' ' + ctx.parsed.y + '%' } } },
+      scales: { y: { ticks: { callback: v => v+'%' } } }
+    })
+  });
+})();
+</script>
+</body>
+</html>
