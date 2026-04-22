@@ -347,14 +347,12 @@ td.bold { font-weight: 700; color: #1e293b; }
             <th class="r">Locação</th>
             <th class="r">Loc. CPAP</th>
             <th class="r">Total</th>
-            <th class="r">Meta Loc.</th>
             <th class="r">% Loc.</th>
-            <th class="r">Meta Geral</th>
             <th class="r">% Geral</th>
           </tr>
         </thead>
         <tbody id="b2c-live-tbody">
-          <tr><td colspan="10" style="text-align:center;padding:40px;color:#94a3b8">Carregando...</td></tr>
+          <tr><td colspan="8" style="text-align:center;padding:40px;color:#94a3b8">Carregando...</td></tr>
         </tbody>
       </table>
     </div>
@@ -500,25 +498,25 @@ const INTERVAL_FETCH = 20 * 60 * 1000;
 
 /* ═══ MAPA COMPLETO DAS LOJAS
    Campos: id, nome, col(base), acess, equip, loc, cpap(null=sem), totalReal, total
-   metaLoc  = col+2 na linha de locação
-   metaGeral= col+2 na linha de totalReal-1
+   As porcentagens são lidas 3 colunas à direita de loc (para % de locação)
+   e 3 colunas à direita de totalReal (para % geral)
 ═══ */
 const LOJAS = [
-  { id:'rec', nome:'Recreio',         col:'G', acess:27,  equip:28,  loc:29,  cpap:30,  totalReal:31,  total:32,  metaLoc:'I29',  metaGeral:'I30'  },
-  { id:'bar', nome:'Barra da Tijuca', col:'M', acess:27,  equip:28,  loc:29,  cpap:30,  totalReal:31,  total:32,  metaLoc:'O29',  metaGeral:'O30'  },
-  { id:'jb',  nome:'Jardim Botânico', col:'S', acess:27,  equip:28,  loc:29,  cpap:30,  totalReal:31,  total:32,  metaLoc:'U29',  metaGeral:'U30'  },
-  { id:'bot', nome:'Botafogo',        col:'G', acess:93,  equip:94,  loc:95,  cpap:96,  totalReal:97,  total:98,  metaLoc:'I95',  metaGeral:'I96'  },
-  { id:'cop', nome:'Copacabana',      col:'M', acess:93,  equip:94,  loc:95,  cpap:96,  totalReal:97,  total:98,  metaLoc:'O95',  metaGeral:'O96'  },
-  { id:'tij', nome:'Tijuca',          col:'S', acess:93,  equip:94,  loc:95,  cpap:96,  totalReal:97,  total:98,  metaLoc:'U95',  metaGeral:'U96'  },
-  { id:'vr',  nome:'Volta Redonda',   col:'G', acess:162, equip:164, loc:165, cpap:null,totalReal:168, total:169, metaLoc:'I165', metaGeral:'I167' },
-  { id:'dom', nome:'Domiciliar RJ',   col:'M', acess:162, equip:163, loc:164, cpap:165, totalReal:166, total:167, metaLoc:'O164', metaGeral:'O165' },
-  { id:'nit', nome:'Niterói',         col:'S', acess:162, equip:163, loc:164, cpap:165, totalReal:166, total:167, metaLoc:'U164', metaGeral:'U165' },
-  { id:'jf',  nome:'Juiz de Fora',    col:'G', acess:231, equip:232, loc:233, cpap:234, totalReal:235, total:236, metaLoc:'I233', metaGeral:'I234' },
-  { id:'bh',  nome:'Belo Horizonte',  col:'S', acess:231, equip:232, loc:233, cpap:234, totalReal:235, total:236, metaLoc:'U233', metaGeral:'U234' },
-  { id:'poa', nome:'Porto Alegre',    col:'G', acess:299, equip:300, loc:301, cpap:302, totalReal:303, total:304, metaLoc:'I301', metaGeral:'I302' },
-  { id:'cur', nome:'Curitiba',        col:'M', acess:299, equip:300, loc:301, cpap:302, totalReal:303, total:304, metaLoc:'O301', metaGeral:'O302' },
-  { id:'sal', nome:'Salvador',        col:'S', acess:299, equip:300, loc:301, cpap:302, totalReal:303, total:304, metaLoc:'U301', metaGeral:'U302' },
-  { id:'nig', nome:'Nova Iguaçu',     col:'G', acess:367, equip:368, loc:369, cpap:370, totalReal:371, total:372, metaLoc:'I369', metaGeral:'I370' },
+  { id:'rec', nome:'Recreio',         col:'G', acess:27,  equip:28,  loc:29,  cpap:30,  totalReal:31,  total:32 },
+  { id:'bar', nome:'Barra da Tijuca', col:'M', acess:27,  equip:28,  loc:29,  cpap:30,  totalReal:31,  total:32 },
+  { id:'jb',  nome:'Jardim Botânico', col:'S', acess:27,  equip:28,  loc:29,  cpap:30,  totalReal:31,  total:32 },
+  { id:'bot', nome:'Botafogo',        col:'G', acess:93,  equip:94,  loc:95,  cpap:96,  totalReal:97,  total:98 },
+  { id:'cop', nome:'Copacabana',      col:'M', acess:93,  equip:94,  loc:95,  cpap:96,  totalReal:97,  total:98 },
+  { id:'tij', nome:'Tijuca',          col:'S', acess:93,  equip:94,  loc:95,  cpap:96,  totalReal:97,  total:98 },
+  { id:'vr',  nome:'Volta Redonda',   col:'G', acess:162, equip:164, loc:165, cpap:null,totalReal:168, total:169 },
+  { id:'dom', nome:'Domiciliar RJ',   col:'M', acess:162, equip:163, loc:164, cpap:165, totalReal:166, total:167 },
+  { id:'nit', nome:'Niterói',         col:'S', acess:162, equip:163, loc:164, cpap:165, totalReal:166, total:167 },
+  { id:'jf',  nome:'Juiz de Fora',    col:'G', acess:231, equip:232, loc:233, cpap:234, totalReal:235, total:236 },
+  { id:'bh',  nome:'Belo Horizonte',  col:'S', acess:231, equip:232, loc:233, cpap:234, totalReal:235, total:236 },
+  { id:'poa', nome:'Porto Alegre',    col:'G', acess:299, equip:300, loc:301, cpap:302, totalReal:303, total:304 },
+  { id:'cur', nome:'Curitiba',        col:'M', acess:299, equip:300, loc:301, cpap:302, totalReal:303, total:304 },
+  { id:'sal', nome:'Salvador',        col:'S', acess:299, equip:300, loc:301, cpap:302, totalReal:303, total:304 },
+  { id:'nig', nome:'Nova Iguaçu',     col:'G', acess:367, equip:368, loc:369, cpap:370, totalReal:371, total:372 },
 ];
 
 /* ═══ HELPERS ═══ */
@@ -552,6 +550,18 @@ function cellRef(rows, ref) {
   const m = ref.match(/^([A-Z]+)(\d+)$/i);
   if (!m) return '';
   return cellRC(rows, m[1], parseInt(m[2]));
+}
+
+function getColOffset(col, offset) {
+  const idx = colIdx(col);
+  const newIdx = idx + offset;
+  let result = '';
+  let n = newIdx + 1;
+  while (n > 0) {
+    result = String.fromCharCode((n - 1) % 26 + 65) + result;
+    n = Math.floor((n - 1) / 26);
+  }
+  return result;
 }
 
 function num(v) {
@@ -619,14 +629,21 @@ function readLoja(rows, loja) {
   const loc   = num(cellRC(rows, c, loja.loc));
   const cpap  = loja.cpap ? num(cellRC(rows, c, loja.cpap)) : 0;
   const total = num(cellRC(rows, c, loja.total));
-  const mLoc  = num(cellRef(rows, loja.metaLoc));
-  const mGeral= num(cellRef(rows, loja.metaGeral));
   const locTotal = loc + cpap;
   const venda = acess + equip;
   const totalCalc = venda + locTotal;
-  const pLoc  = pct(locTotal, mLoc);
-  const pGeral= pct(totalCalc, mGeral);
-  return { acess, equip, loc, cpap, locTotal, total, mLoc, mGeral, pLoc, pGeral, venda: venda, totalCalc: totalCalc };
+  
+  // Capturar porcentagens diretamente da planilha (3 colunas à direita)
+  const pctLocCol = getColOffset(c, 3);
+  const pctGeralCol = getColOffset(c, 3);
+  const pLoc_raw = num(cellRC(rows, pctLocCol, loja.loc));
+  const pGeral_raw = num(cellRC(rows, pctGeralCol, loja.totalReal || loja.total));
+  
+  // Se a planilha tem porcentagem em formato decimal (ex: 0.95 = 95%), converter para percentual
+  const pLoc = pLoc_raw > 0 ? (pLoc_raw > 1 ? pLoc_raw : pLoc_raw * 100) : null;
+  const pGeral = pGeral_raw > 0 ? (pGeral_raw > 1 ? pGeral_raw : pGeral_raw * 100) : null;
+  
+  return { acess, equip, loc, cpap, locTotal, total, pLoc, pGeral, venda: venda, totalCalc: totalCalc };
 }
 
 function updateB2C() {
@@ -682,9 +699,7 @@ function updateB2C() {
       <td class="r">${brl(v.loc)}</td>
       <td class="r">${brl(v.cpap)}</td>
       <td class="r bold">${brl(t)}</td>
-      <td class="r">${v.mLoc>0?brl(v.mLoc):'—'}</td>
       <td class="r"><span class="meta-badge ${fL.badge}">${pLstr}</span></td>
-      <td class="r">${v.mGeral>0?brl(v.mGeral):'—'}</td>
       <td class="r"><span class="meta-badge ${fG.badge}">${pGstr}</span></td>
     </tr>`;
   }).join('');
@@ -697,7 +712,7 @@ function updateB2C() {
       <td class="r">${brl(totLoc)}</td>
       <td class="r">${brl(totCpap)}</td>
       <td class="r" style="color:#2563eb">${brl(totTotal)}</td>
-      <td class="r" colspan="4"></td>
+      <td class="r" colspan="2"></td>
     </tr>`;
 
   window._b2cLive = { valores: b2cValores, grandTotal: totTotal };
