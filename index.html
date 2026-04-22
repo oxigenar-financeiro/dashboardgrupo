@@ -227,63 +227,136 @@ td.bold { font-weight: 700; color: #1e293b; }
       <span class="clock" id="clock">--:--:--</span>
     </div>
   </div>
+<style>
+/* Cards compactos para todas as lojas numa tela */
+.lojas-all {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  flex: 1;
+  overflow: hidden;
+}
+.loja-sm {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 9px 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+  overflow: hidden;
+}
+.loja-sm::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--accent, #e2e8f0);
+}
+.loja-sm-name {
+  font-size: 10px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-top: 1px;
+}
+.loja-sm-total {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+.loja-sm-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1px;
+}
+.loja-sm-sub {
+  font-size: 10px;
+  color: #94a3b8;
+}
+.loja-sm-val {
+  font-size: 11px;
+  font-weight: 600;
+  color: #475569;
+}
+.meta-badges {
+  display: flex;
+  gap: 4px;
+  margin-top: 3px;
+  flex-wrap: wrap;
+}
+.meta-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.pbar-sm { height: 3px; background: #f1f5f9; border-radius: 2px; margin-top: 3px; overflow: hidden; }
+.pbar-sm-fill { height: 100%; border-radius: 2px; }
+/* Cores por faixa (regra informada) */
+.c-95  { background:#dcfce7; color:#166534; }   /* 95-100% verde */
+.c-85  { background:#fef9c3; color:#854d0e; }   /* 85-95% amarelo */
+.c-70  { background:#ffedd5; color:#9a3412; }   /* 70-85% laranja */
+.c-0   { background:#fee2e2; color:#991b1b; }   /* <70% vermelho */
+.bar-95  { background: #22c55e; }
+.bar-85  { background: #eab308; }
+.bar-70  { background: #f97316; }
+.bar-0   { background: #ef4444; }
+</style>
 
-  <!-- ═══════════════════ TELA 1 · B2C Linha 1 (Recreio / Barra / JB) ═══════════════════ -->
+  <!-- ═══ LOADING ═══ -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+    <div class="loading-txt" id="loadingTxt">Carregando dados das planilhas...</div>
+  </div>
+
+  <!-- ═══ TOPBAR ═══ -->
+  <div class="topbar">
+    <div class="logo">Grupo <span>Oxigenar</span></div>
+    <div class="screen-pill" id="screenLabel">Carregando...</div>
+    <div class="topbar-right">
+      <div>
+        <span class="status-dot" id="statusDot"></span>
+        <span class="status-txt" id="statusTxt">Aguardando...</span>
+      </div>
+      <span class="date-txt" id="dateTxt"></span>
+      <span class="clock" id="clock">--:--:--</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TELA 1 · TODAS AS LOJAS B2C (cards compactos 5 colunas x 3 linhas)
+  ═══════════════════════════════════════════════════════════ -->
   <div class="screen" id="s1">
     <div class="sh">
       <span class="sh-tag tag-blue">B2C</span>
-      <span class="sh-title">Lojas — linha 1 (acumulado mês)</span>
-      <span class="sh-sub">Venda · Locação · Total</span>
+      <span class="sh-title">Todas as lojas — acumulado mês</span>
+      <span class="sh-sub">
+        <span style="display:inline-flex;align-items:center;gap:12px">
+          <span><span class="meta-badge c-95">≥95%</span> Meta atingida</span>
+          <span><span class="meta-badge c-85">85–95%</span> Amarelo</span>
+          <span><span class="meta-badge c-70">70–85%</span> Laranja</span>
+          <span><span class="meta-badge c-0">&lt;70%</span> Vermelho</span>
+        </span>
+      </span>
     </div>
-    <div class="lojas-grid" id="grid-l1"></div>
+    <div class="lojas-all" id="todas-lojas-grid"></div>
   </div>
 
-  <!-- ═══════════════════ TELA 2 · B2C Linha 2 (Botafogo / Copa / Tijuca) ═══════════════════ -->
+  <!-- ═══════════════════════════════════════════════════════
+       TELA 2 · CONSOLIDADO B2C (tabela completa)
+  ═══════════════════════════════════════════════════════════ -->
   <div class="screen" id="s2">
     <div class="sh">
       <span class="sh-tag tag-blue">B2C</span>
-      <span class="sh-title">Lojas — linha 2 (acumulado mês)</span>
-      <span class="sh-sub">Venda · Locação · Total</span>
-    </div>
-    <div class="lojas-grid" id="grid-l2"></div>
-  </div>
-
-  <!-- ═══════════════════ TELA 3 · B2C Linha 3 (VR / Domiciliar / Niterói) ═══════════════════ -->
-  <div class="screen" id="s3">
-    <div class="sh">
-      <span class="sh-tag tag-blue">B2C</span>
-      <span class="sh-title">Lojas — linha 3 (acumulado mês)</span>
-      <span class="sh-sub">Venda · Locação · Total</span>
-    </div>
-    <div class="lojas-grid" id="grid-l3"></div>
-  </div>
-
-  <!-- ═══════════════════ TELA 4 · B2C Linha 4 (JF / Curitiba / BH) ═══════════════════ -->
-  <div class="screen" id="s4">
-    <div class="sh">
-      <span class="sh-tag tag-blue">B2C</span>
-      <span class="sh-title">Lojas — linha 4 (acumulado mês)</span>
-      <span class="sh-sub">Venda · Locação · Total</span>
-    </div>
-    <div class="lojas-grid" id="grid-l4"></div>
-  </div>
-
-  <!-- ═══════════════════ TELA 5 · B2C Linha 5 (POA / Curitiba / Salvador / Nova Iguaçu) ═══════════════════ -->
-  <div class="screen" id="s5">
-    <div class="sh">
-      <span class="sh-tag tag-blue">B2C</span>
-      <span class="sh-title">Lojas — linha 5 (acumulado mês)</span>
-      <span class="sh-sub">Venda · Locação · Total</span>
-    </div>
-    <div class="lojas-grid" id="grid-l5"></div>
-  </div>
-
-  <!-- ═══════════════════ TELA 6 · B2C Consolidado ao vivo ═══════════════════ -->
-  <div class="screen" id="s6">
-    <div class="sh">
-      <span class="sh-tag tag-blue">B2C</span>
-      <span class="sh-title">Consolidado B2C — todas as lojas</span>
-      <span class="sh-sub">Dados ao vivo · Atualiza a cada 20 min</span>
+      <span class="sh-title">Consolidado — todas as lojas ao vivo</span>
+      <span class="sh-sub">Atualiza a cada 20 min</span>
     </div>
     <div class="card" style="overflow-y:auto">
       <table>
@@ -295,21 +368,27 @@ td.bold { font-weight: 700; color: #1e293b; }
             <th class="r">Locação</th>
             <th class="r">Loc. CPAP</th>
             <th class="r">Total</th>
+            <th class="r">Meta Loc.</th>
+            <th class="r">% Loc.</th>
+            <th class="r">Meta Geral</th>
+            <th class="r">% Geral</th>
           </tr>
         </thead>
         <tbody id="b2c-live-tbody">
-          <tr><td colspan="6" style="text-align:center;color:#94a3b8;padding:20px">Carregando...</td></tr>
+          <tr><td colspan="10" style="text-align:center;color:#94a3b8;padding:20px">Carregando...</td></tr>
         </tbody>
       </table>
     </div>
   </div>
 
-  <!-- ═══════════════════ TELA 7 · B2B ═══════════════════ -->
-  <div class="screen" id="s7">
+  <!-- ═══════════════════════════════════════════════════════
+       TELA 3 · B2B
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="screen" id="s3">
     <div class="sh">
       <span class="sh-tag tag-purple">B2B</span>
       <span class="sh-title">Oxigenar — Resultado em tempo real</span>
-      <span class="sh-sub">Dados ao vivo · Atualiza a cada 20 min</span>
+      <span class="sh-sub">Atualiza a cada 20 min</span>
     </div>
     <div class="four-kpi">
       <div class="kpi">
@@ -337,7 +416,7 @@ td.bold { font-weight: 700; color: #1e293b; }
           <table>
             <thead><tr><th>Data</th><th class="r">Venda Acess.</th><th class="r">Venda Equip.</th><th class="r">Total dia</th></tr></thead>
             <tbody id="b2b-daily-tbody">
-              <tr><td colspan="4" style="text-align:center;color:#94a3b8;padding:20px">Aguardando primeiro fechamento às 00h...</td></tr>
+              <tr><td colspan="4" style="text-align:center;color:#94a3b8;padding:16px">Aguardando primeiro fechamento às 00h...</td></tr>
             </tbody>
           </table>
         </div>
@@ -348,7 +427,7 @@ td.bold { font-weight: 700; color: #1e293b; }
           <table>
             <thead><tr><th>Data</th><th class="r">Total lojas</th></tr></thead>
             <tbody id="b2c-daily-tbody">
-              <tr><td colspan="2" style="text-align:center;color:#94a3b8;padding:20px">Aguardando primeiro fechamento às 00h...</td></tr>
+              <tr><td colspan="2" style="text-align:center;color:#94a3b8;padding:16px">Aguardando primeiro fechamento às 00h...</td></tr>
             </tbody>
           </table>
         </div>
@@ -356,8 +435,10 @@ td.bold { font-weight: 700; color: #1e293b; }
     </div>
   </div>
 
-  <!-- ═══════════════════ TELA 8 · Estoque ═══════════════════ -->
-  <div class="screen" id="s8">
+  <!-- ═══════════════════════════════════════════════════════
+       TELA 4 · ESTOQUE
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="screen" id="s4">
     <div class="sh">
       <span class="sh-tag tag-teal">Estoque</span>
       <span class="sh-title">Equipamentos locados e vendidos</span>
@@ -369,9 +450,7 @@ td.bold { font-weight: 700; color: #1e293b; }
         <div class="card">
           <table>
             <thead><tr><th>Equipamento</th><th class="r">Locados</th><th class="r">Vendidos</th></tr></thead>
-            <tbody id="estoque-ox-tbody">
-              <tr><td colspan="3" style="text-align:center;color:#94a3b8;padding:20px">Carregando...</td></tr>
-            </tbody>
+            <tbody id="estoque-ox-tbody"><tr><td colspan="3" style="text-align:center;color:#94a3b8;padding:16px">Carregando...</td></tr></tbody>
           </table>
         </div>
       </div>
@@ -380,17 +459,17 @@ td.bold { font-weight: 700; color: #1e293b; }
         <div class="card">
           <table>
             <thead><tr><th>Equipamento</th><th class="r">Locados</th><th class="r">Vendidos</th></tr></thead>
-            <tbody id="estoque-pul-tbody">
-              <tr><td colspan="3" style="text-align:center;color:#94a3b8;padding:20px">Carregando...</td></tr>
-            </tbody>
+            <tbody id="estoque-pul-tbody"><tr><td colspan="3" style="text-align:center;color:#94a3b8;padding:16px">Carregando...</td></tr></tbody>
           </table>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ═══════════════════ TELA 9 · Cobrança ═══════════════════ -->
-  <div class="screen" id="s9">
+  <!-- ═══════════════════════════════════════════════════════
+       TELA 5 · COBRANÇA
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="screen" id="s5">
     <div class="sh">
       <span class="sh-tag tag-red">Cobrança</span>
       <span class="sh-title">Recuperação e inadimplência</span>
@@ -439,85 +518,51 @@ td.bold { font-weight: 700; color: #1e293b; }
       <button class="cbtn" onclick="fetchAll()" style="margin-left:8px">&#8635; Atualizar agora</button>
     </div>
     <div class="dots" id="dots"></div>
-    <div style="font-size:12px;color:#94a3b8;font-weight:600" id="screenCount">1 / 9</div>
+    <div style="font-size:12px;color:#94a3b8;font-weight:600" id="screenCount">1 / 5</div>
   </div>
 
 </div><!-- #dash -->
 
 <script>
-/* ═══════════════════════════════════════════════════════════
-   URLs DAS PLANILHAS (CSV público do Google Sheets)
-═══════════════════════════════════════════════════════════ */
 const CSV = {
   b2c: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSFCQ6eYfaCBWKUp4kJ5x5W4r9Zcm8g1QY7YwhZZR9NglDsqieTEIAiIleRFLYFB8SwksAGnWIt5Pye/pub?gid=357115975&single=true&output=csv',
   b2b: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ4aQ6YIYoTxp4BeYEwOiM2iDFzcFrIKzsXIUXd0F2qYZ9o-mXOno832zkg-C4eOtZ2LDZFwg5wxCtw/pub?gid=1251665607&single=true&output=csv',
   ec:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vSeKCyDv71GwJgQTWXXUxeugGOUBxqXz9_Vmlj-B0yJctD4Kx66cP_n2_D-Ef0_0WZm51FXLPB2Jw2O/pub?gid=0&single=true&output=csv'
 };
-
 const INTERVAL_SLIDE = 20000;
 const INTERVAL_FETCH = 20 * 60 * 1000;
 
-/* ═══════════════════════════════════════════════════════════
-   MAPA COMPLETO DAS LOJAS B2C
-   Estrutura real da planilha (confirmada pelo usuário):
-   Col G = grupo esquerdo, M = grupo centro, S = grupo direito
-   Blocos de linhas se repetem a cada ~68 linhas:
-     Bloco 1 (linhas 27-32): Recreio | Barra da Tijuca | Jardim Botânico
-     Bloco 2 (linhas 93-98): Botafogo | Copacabana | Tijuca
-     Bloco 3 (linhas 162-169): Volta Redonda | Domiciliar RJ | Niterói
-     Bloco 4 (linhas 231-236): Juiz de Fora | — | Belo Horizonte
-     Bloco 5 (linhas 299-304): Porto Alegre | Curitiba | Salvador
-     Bloco 6 (linhas 367-372): Nova Iguaçu | — | —
-   Linhas: acess=+0, equip=+1, loc=+2, cpap=+3, (pula +4), total=+5
-   Exceção Volta Redonda: linhas 162-169, pula 163 e 166 → acess=162,equip=164,loc=165,cpap=167(sem),total=169
-═══════════════════════════════════════════════════════════ */
-
-// [nome, coluna, linha_acess, linha_equip, linha_loc, linha_cpap, linha_total]
-// coluna: G=6, M=12, S=18 (0-indexed)
+/* ═══ MAPA COMPLETO DAS LOJAS
+   Campos: id, nome, col(base), acess, equip, loc, cpap(null=sem), totalReal, total
+   metaLoc  = col+2 na linha de locação
+   metaGeral= col+2 na linha de totalReal-1
+═══ */
 const LOJAS = [
-  // Bloco 1
-  { id:'rec', nome:'Recreio',          col:'G', acess:27, equip:28, loc:29, cpap:30, total:32 },
-  { id:'bar', nome:'Barra da Tijuca',  col:'M', acess:27, equip:28, loc:29, cpap:30, total:32 },
-  { id:'jb',  nome:'Jardim Botânico',  col:'S', acess:27, equip:28, loc:29, cpap:30, total:32 },
-  // Bloco 2
-  { id:'bot', nome:'Botafogo',         col:'G', acess:93, equip:94, loc:95, cpap:96, total:98 },
-  { id:'cop', nome:'Copacabana',       col:'M', acess:93, equip:94, loc:95, cpap:96, total:98 },
-  { id:'tij', nome:'Tijuca',           col:'S', acess:93, equip:94, loc:95, cpap:96, total:98 },
-  // Bloco 3 — Volta Redonda pula linhas 163 e 166
-  { id:'vr',  nome:'Volta Redonda',    col:'G', acess:162, equip:164, loc:165, cpap:null, total:169 },
-  { id:'dom', nome:'Domiciliar RJ',    col:'M', acess:162, equip:163, loc:164, cpap:165, total:167 },
-  { id:'nit', nome:'Niterói',          col:'S', acess:162, equip:163, loc:164, cpap:165, total:167 },
-  // Bloco 4
-  { id:'jf',  nome:'Juiz de Fora',    col:'G', acess:231, equip:232, loc:233, cpap:234, total:236 },
-  { id:'bh',  nome:'Belo Horizonte',  col:'S', acess:231, equip:232, loc:233, cpap:234, total:236 },
-  // Bloco 5
-  { id:'poa', nome:'Porto Alegre',    col:'G', acess:299, equip:300, loc:301, cpap:302, total:304 },
-  { id:'cur', nome:'Curitiba',        col:'M', acess:299, equip:300, loc:301, cpap:302, total:304 },
-  { id:'sal', nome:'Salvador',        col:'S', acess:299, equip:300, loc:301, cpap:302, total:304 },
-  // Bloco 6
-  { id:'nig', nome:'Nova Iguaçu',     col:'G', acess:367, equip:368, loc:369, cpap:370, total:372 },
+  { id:'rec', nome:'Recreio',         col:'G', acess:27,  equip:28,  loc:29,  cpap:30,  totalReal:31,  total:32,  metaLoc:'I29',  metaGeral:'I30'  },
+  { id:'bar', nome:'Barra da Tijuca', col:'M', acess:27,  equip:28,  loc:29,  cpap:30,  totalReal:31,  total:32,  metaLoc:'O29',  metaGeral:'O30'  },
+  { id:'jb',  nome:'Jardim Botânico', col:'S', acess:27,  equip:28,  loc:29,  cpap:30,  totalReal:31,  total:32,  metaLoc:'U29',  metaGeral:'U30'  },
+  { id:'bot', nome:'Botafogo',        col:'G', acess:93,  equip:94,  loc:95,  cpap:96,  totalReal:97,  total:98,  metaLoc:'I95',  metaGeral:'I96'  },
+  { id:'cop', nome:'Copacabana',      col:'M', acess:93,  equip:94,  loc:95,  cpap:96,  totalReal:97,  total:98,  metaLoc:'O95',  metaGeral:'O96'  },
+  { id:'tij', nome:'Tijuca',          col:'S', acess:93,  equip:94,  loc:95,  cpap:96,  totalReal:97,  total:98,  metaLoc:'U95',  metaGeral:'U96'  },
+  { id:'vr',  nome:'Volta Redonda',   col:'G', acess:162, equip:164, loc:165, cpap:null,totalReal:168, total:169, metaLoc:'I165', metaGeral:'I167' },
+  { id:'dom', nome:'Domiciliar RJ',   col:'M', acess:162, equip:163, loc:164, cpap:165, totalReal:166, total:167, metaLoc:'O164', metaGeral:'O165' },
+  { id:'nit', nome:'Niterói',         col:'S', acess:162, equip:163, loc:164, cpap:165, totalReal:166, total:167, metaLoc:'U164', metaGeral:'U165' },
+  { id:'jf',  nome:'Juiz de Fora',    col:'G', acess:231, equip:232, loc:233, cpap:234, totalReal:235, total:236, metaLoc:'I233', metaGeral:'I234' },
+  { id:'bh',  nome:'Belo Horizonte',  col:'S', acess:231, equip:232, loc:233, cpap:234, totalReal:235, total:236, metaLoc:'U233', metaGeral:'U234' },
+  { id:'poa', nome:'Porto Alegre',    col:'G', acess:299, equip:300, loc:301, cpap:302, totalReal:303, total:304, metaLoc:'I301', metaGeral:'I302' },
+  { id:'cur', nome:'Curitiba',        col:'M', acess:299, equip:300, loc:301, cpap:302, totalReal:303, total:304, metaLoc:'O301', metaGeral:'O302' },
+  { id:'sal', nome:'Salvador',        col:'S', acess:299, equip:300, loc:301, cpap:302, totalReal:303, total:304, metaLoc:'U301', metaGeral:'U302' },
+  { id:'nig', nome:'Nova Iguaçu',     col:'G', acess:367, equip:368, loc:369, cpap:370, totalReal:371, total:372, metaLoc:'I369', metaGeral:'I370' },
 ];
 
-// Agrupa em telas de 3 (para os cards de loja)
-const LINHAS_TELAS = [
-  ['rec','bar','jb'],
-  ['bot','cop','tij'],
-  ['vr','dom','nit'],
-  ['jf','bh',null],
-  ['poa','cur','sal'],
-  ['nig',null,null],
-];
-
-/* ═══════════════════════════════════════════════════════════
-   HELPERS
-═══════════════════════════════════════════════════════════ */
+/* ═══ HELPERS ═══ */
 function parseCSV(text) {
   const rows = [];
   for (const line of text.split('\n')) {
     const row = []; let cur = '', inQ = false;
     for (let i = 0; i < line.length; i++) {
       const ch = line[i];
-      if (ch === '"') { inQ = !inQ; }
+      if (ch === '"') inQ = !inQ;
       else if (ch === ',' && !inQ) { row.push(cur.trim()); cur = ''; }
       else cur += ch;
     }
@@ -528,125 +573,93 @@ function parseCSV(text) {
 }
 
 function colIdx(col) {
-  return col.toUpperCase().split('').reduce((a, c) => a * 26 + c.charCodeAt(0) - 64, 0) - 1;
+  return col.toUpperCase().split('').reduce((a,c) => a*26 + c.charCodeAt(0)-64, 0) - 1;
 }
 
-function cell(rows, col, linha) {
-  const r = rows[linha - 1];
+function cellRC(rows, colStr, rowNum) {
+  const r = rows[rowNum - 1];
   if (!r) return '';
-  return r[colIdx(col)] || '';
+  return r[colIdx(colStr)] || '';
+}
+
+// Aceita tanto "I29" quanto col+row separados
+function cellRef(rows, ref) {
+  const m = ref.match(/^([A-Z]+)(\d+)$/i);
+  if (!m) return '';
+  return cellRC(rows, m[1], parseInt(m[2]));
 }
 
 function num(v) {
   if (!v && v !== 0) return 0;
-  const n = parseFloat(String(v).replace(/[R$\s.]/g, '').replace(',', '.'));
+  const n = parseFloat(String(v).replace(/[R$\s.]/g,'').replace(',','.'));
   return isNaN(n) ? 0 : n;
 }
 
 function brl(v, compact) {
   const n = typeof v === 'number' ? v : num(v);
   if (compact && Math.abs(n) >= 1000)
-    return 'R$\u00a0' + (n/1000).toFixed(1).replace('.', ',') + 'k';
-  return n.toLocaleString('pt-BR', { style:'currency', currency:'BRL', minimumFractionDigits:2 });
+    return 'R$\u00a0' + (n/1000).toFixed(1).replace('.',',') + 'k';
+  return n.toLocaleString('pt-BR', {style:'currency',currency:'BRL',minimumFractionDigits:2});
 }
 
-function pbarCls(pct) {
-  if (pct >= 95) return '#059669';
-  if (pct >= 85) return '#22c55e';
-  if (pct >= 70) return '#d97706';
-  if (pct >= 55) return '#ea580c';
-  return '#dc2626';
+function pct(val, meta) {
+  if (!meta || meta === 0) return null;
+  return (val / meta) * 100;
 }
 
-function badgeCls(pct) {
-  if (pct >= 95) return 'b-green';
-  if (pct >= 85) return 'b-green';
-  if (pct >= 70) return 'b-yellow';
-  if (pct >= 55) return 'b-orange';
-  return 'b-red';
+function faixaCls(p) {
+  if (p === null) return { badge:'c-0', bar:'bar-0', accent:'#e2e8f0' };
+  if (p >= 95)   return { badge:'c-95', bar:'bar-95', accent:'#22c55e' };
+  if (p >= 85)   return { badge:'c-85', bar:'bar-85', accent:'#eab308' };
+  if (p >= 70)   return { badge:'c-70', bar:'bar-70', accent:'#f97316' };
+  return             { badge:'c-0',  bar:'bar-0',  accent:'#ef4444' };
 }
 
-function setText(id, v) { const el = document.getElementById(id); if (el) el.textContent = v; }
+function setText(id, v) { const el=document.getElementById(id); if(el) el.textContent=v; }
 
-/* ═══════════════════════════════════════════════════════════
-   SNAPSHOT DIÁRIO
-═══════════════════════════════════════════════════════════ */
-const SK = 'oxigenar_snaps_v2';
-function getSnaps() { try { return JSON.parse(localStorage.getItem(SK) || '{}'); } catch { return {}; } }
-function saveSnap(date, data) {
-  const s = getSnaps(); s[date] = data;
-  const keys = Object.keys(s).sort();
-  if (keys.length > 31) delete s[keys[0]];
-  localStorage.setItem(SK, JSON.stringify(s));
-}
-let lastSnapDate = localStorage.getItem('oxigenar_snap_date_v2') || '';
-
-/* ═══════════════════════════════════════════════════════════
-   FETCH
-═══════════════════════════════════════════════════════════ */
-let liveData = { b2c: null, b2b: null, ec: null };
-let fetchOk   = { b2c: false, b2b: false, ec: false };
+/* ═══ FETCH ═══ */
+let liveData = { b2c:null, b2b:null, ec:null };
+let fetchOk  = { b2c:false, b2b:false, ec:false };
 
 async function fetchCSV(url) {
-  const r = await fetch(url + '&_t=' + Date.now(), { cache: 'no-store' });
+  const r = await fetch(url + '&_t=' + Date.now(), { cache:'no-store' });
   if (!r.ok) throw new Error('HTTP ' + r.status);
   return parseCSV(await r.text());
 }
 
 async function fetchAll() {
   setStatus('Atualizando...', null);
-  for (const key of ['b2c','b2b','ec']) {
-    try { liveData[key] = await fetchCSV(CSV[key]); fetchOk[key] = true; }
-    catch(e) { fetchOk[key] = false; console.error(key, e); }
+  for (const k of ['b2c','b2b','ec']) {
+    try { liveData[k] = await fetchCSV(CSV[k]); fetchOk[k]=true; }
+    catch(e) { fetchOk[k]=false; console.error(k,e); }
   }
   updateAll();
   tryMidnightSnap();
   const ok = fetchOk.b2c && fetchOk.b2b && fetchOk.ec;
-  const partial = Object.values(fetchOk).some(Boolean) && !ok;
-  const hm = new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
-  if (ok) setStatus('Atualizado às ' + hm, true);
-  else if (partial) setStatus('Parcial — falha em: ' + Object.keys(fetchOk).filter(k=>!fetchOk[k]).join(', '), false);
-  else setStatus('Erro ao carregar dados', false);
+  const any = Object.values(fetchOk).some(Boolean);
+  const hm  = new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+  if (ok)       setStatus('Atualizado às '+hm, true);
+  else if (any) setStatus('Parcial — falha: '+Object.keys(fetchOk).filter(k=>!fetchOk[k]).join(', '), false);
+  else          setStatus('Erro ao carregar dados', false);
   document.getElementById('loadingOverlay').style.display = 'none';
 }
 
-/* ═══════════════════════════════════════════════════════════
-   LEITURA B2C
-═══════════════════════════════════════════════════════════ */
+/* ═══ B2C ═══ */
 let b2cValores = {};
 
-function readLojaValues(rows, loja) {
-  const acess = num(cell(rows, loja.col, loja.acess));
-  const equip = num(cell(rows, loja.col, loja.equip));
-  const loc   = num(cell(rows, loja.col, loja.loc));
-  const cpap  = loja.cpap ? num(cell(rows, loja.col, loja.cpap)) : 0;
-  const total = num(cell(rows, loja.col, loja.total));
-  return { acess, equip, loc, cpap, total, venda: acess + equip };
-}
-
-function lojaCardHTML(loja, v) {
-  if (!loja || !v) return `
-    <div class="loja" style="border-style:dashed;background:#f8fafc;opacity:0.4">
-      <div class="loja-name" style="color:#cbd5e1">—</div>
-    </div>`;
-  const totalDisp = v.total > 0 ? v.total : (v.venda + v.loc + v.cpap);
-  return `
-    <div class="loja">
-      <div class="loja-name">${loja.nome}</div>
-      <div class="loja-vals">
-        <div>
-          <div class="loja-num">${brl(v.venda, true)}</div>
-          <div class="loja-sub">Venda</div>
-        </div>
-        <div>
-          <div class="loja-num" style="color:#0f766e">${brl(v.loc + v.cpap, true)}</div>
-          <div class="loja-sub">Locação</div>
-        </div>
-      </div>
-      <div style="font-size:12px;color:#475569;margin-top:4px">
-        Total: <strong style="color:#1e293b">${brl(totalDisp)}</strong>
-      </div>
-    </div>`;
+function readLoja(rows, loja) {
+  const c = loja.col;
+  const acess = num(cellRC(rows, c, loja.acess));
+  const equip = num(cellRC(rows, c, loja.equip));
+  const loc   = num(cellRC(rows, c, loja.loc));
+  const cpap  = loja.cpap ? num(cellRC(rows, c, loja.cpap)) : 0;
+  const total = num(cellRC(rows, c, loja.total));
+  const mLoc  = num(cellRef(rows, loja.metaLoc));
+  const mGeral= num(cellRef(rows, loja.metaGeral));
+  const locTotal = loc + cpap;
+  const pLoc  = pct(locTotal, mLoc);
+  const pGeral= pct(total || (acess+equip+loc+cpap), mGeral);
+  return { acess, equip, loc, cpap, locTotal, total, mLoc, mGeral, pLoc, pGeral, venda: acess+equip };
 }
 
 function updateB2C() {
@@ -654,349 +667,226 @@ function updateB2C() {
   if (!rows) return;
 
   b2cValores = {};
-  for (const loja of LOJAS) {
-    b2cValores[loja.id] = readLojaValues(rows, loja);
-  }
+  for (const loja of LOJAS) b2cValores[loja.id] = readLoja(rows, loja);
 
-  // Renderiza cards por tela
-  LINHAS_TELAS.forEach((ids, idx) => {
-    const gridId = 'grid-l' + (idx + 1);
-    const grid = document.getElementById(gridId);
-    if (!grid) return;
-    grid.innerHTML = ids.map(id => {
-      const loja = id ? LOJAS.find(l => l.id === id) : null;
-      const v = id ? b2cValores[id] : null;
-      return lojaCardHTML(loja, v);
-    }).join('');
-  });
-
-  // Tabela consolidada (tela 6)
-  const totalGeral = { acess:0, equip:0, loc:0, cpap:0, total:0 };
-  const linhas = LOJAS.map((loja, i) => {
+  /* ── Tela 1: todos os cards numa grid 5×3 ── */
+  const grid = document.getElementById('todas-lojas-grid');
+  grid.innerHTML = LOJAS.map(loja => {
     const v = b2cValores[loja.id];
-    totalGeral.acess += v.acess; totalGeral.equip += v.equip;
-    totalGeral.loc   += v.loc;   totalGeral.cpap  += v.cpap;
-    totalGeral.total += v.total || (v.venda + v.loc + v.cpap);
-    return `<tr style="${i%2===1?'background:#f8fafc':''}">
-      <td>${loja.nome}</td>
+    const totalDisp = v.total || (v.venda + v.locTotal);
+    const fG = faixaCls(v.pGeral);
+    const fL = faixaCls(v.pLoc);
+    const pGstr = v.pGeral !== null ? v.pGeral.toFixed(0)+'%' : '—';
+    const pLstr = v.pLoc   !== null ? v.pLoc.toFixed(0)+'%'  : '—';
+    const barW  = v.pGeral !== null ? Math.min(v.pGeral, 100).toFixed(1) : '0';
+    return `
+      <div class="loja-sm" style="--accent:${fG.accent}">
+        <div class="loja-sm-name">${loja.nome}</div>
+        <div class="loja-sm-total">${brl(totalDisp, true)}</div>
+        <div class="loja-sm-row">
+          <span class="loja-sm-sub">Venda</span>
+          <span class="loja-sm-val">${brl(v.venda, true)}</span>
+        </div>
+        <div class="loja-sm-row">
+          <span class="loja-sm-sub">Locação</span>
+          <span class="loja-sm-val">${brl(v.locTotal, true)}</span>
+        </div>
+        <div class="pbar-sm"><div class="pbar-sm-fill ${fG.bar}" style="width:${barW}%"></div></div>
+        <div class="meta-badges">
+          <span class="meta-badge ${fG.badge}" title="Meta Geral">G: ${pGstr}</span>
+          <span class="meta-badge ${fL.badge}" title="Meta Locação">L: ${pLstr}</span>
+        </div>
+      </div>`;
+  }).join('');
+
+  /* ── Tela 2: tabela consolidada ── */
+  let totAcess=0,totEquip=0,totLoc=0,totCpap=0,totTotal=0;
+  const linhas = LOJAS.map((loja,i) => {
+    const v = b2cValores[loja.id];
+    const t = v.total || (v.venda+v.locTotal);
+    totAcess+=v.acess; totEquip+=v.equip; totLoc+=v.loc; totCpap+=v.cpap; totTotal+=t;
+    const fG=faixaCls(v.pGeral), fL=faixaCls(v.pLoc);
+    const pGstr = v.pGeral!==null ? v.pGeral.toFixed(1).replace('.',',')+'%' : '—';
+    const pLstr = v.pLoc!==null   ? v.pLoc.toFixed(1).replace('.',',')+'%'   : '—';
+    return `<tr style="${i%2?'background:#f8fafc':''}">
+      <td style="font-weight:600">${loja.nome}</td>
       <td class="r">${brl(v.acess)}</td>
       <td class="r">${brl(v.equip)}</td>
       <td class="r">${brl(v.loc)}</td>
       <td class="r">${brl(v.cpap)}</td>
-      <td class="r bold">${brl(v.total || (v.venda+v.loc+v.cpap))}</td>
+      <td class="r bold">${brl(t)}</td>
+      <td class="r">${v.mLoc>0?brl(v.mLoc):'—'}</td>
+      <td class="r"><span class="meta-badge ${fL.badge}">${pLstr}</span></td>
+      <td class="r">${v.mGeral>0?brl(v.mGeral):'—'}</td>
+      <td class="r"><span class="meta-badge ${fG.badge}">${pGstr}</span></td>
     </tr>`;
   }).join('');
 
   document.getElementById('b2c-live-tbody').innerHTML = linhas + `
-    <tr style="background:#eff6ff">
-      <td><strong>Total</strong></td>
-      <td class="r bold">${brl(totalGeral.acess)}</td>
-      <td class="r bold">${brl(totalGeral.equip)}</td>
-      <td class="r bold">${brl(totalGeral.loc)}</td>
-      <td class="r bold">${brl(totalGeral.cpap)}</td>
-      <td class="r bold" style="color:#2563eb">${brl(totalGeral.total)}</td>
+    <tr style="background:#eff6ff;font-weight:700">
+      <td>Total</td>
+      <td class="r">${brl(totAcess)}</td>
+      <td class="r">${brl(totEquip)}</td>
+      <td class="r">${brl(totLoc)}</td>
+      <td class="r">${brl(totCpap)}</td>
+      <td class="r" style="color:#2563eb">${brl(totTotal)}</td>
+      <td class="r" colspan="4"></td>
     </tr>`;
 
-  window._b2cLive = { ...b2cValores, grandTotal: totalGeral.total };
+  window._b2cLive = { valores: b2cValores, grandTotal: totTotal };
 }
 
-/* ═══════════════════════════════════════════════════════════
-   B2B
-═══════════════════════════════════════════════════════════ */
+/* ═══ B2B ═══ */
 function updateB2B() {
   const rows = liveData.b2b;
   if (!rows) return;
-  const acess = num(cell(rows, 'K', 2));
-  const equip = num(cell(rows, 'K', 3));
-  const meta  = num(cell(rows, 'M', 5));
-  const total = acess + equip;
-  setText('b2b-acess', brl(acess, true));
-  setText('b2b-equip', brl(equip, true));
-  setText('b2b-total', brl(total, true));
-  setText('b2b-meta',  brl(meta,  true));
-  const pct = meta > 0 ? (total/meta)*100 : 0;
+  const acess = num(cellRC(rows,'K',2));
+  const equip = num(cellRC(rows,'K',3));
+  const meta  = num(cellRC(rows,'M',5));
+  const total = acess+equip;
+  setText('b2b-acess', brl(acess,true));
+  setText('b2b-equip', brl(equip,true));
+  setText('b2b-total', brl(total,true));
+  setText('b2b-meta',  brl(meta,true));
+  const p = meta>0?(total/meta)*100:0;
   const pEl = document.getElementById('b2b-pct');
-  pEl.textContent = meta > 0 ? pct.toFixed(1).replace('.',',') + '% da meta' : 'Meta não definida';
-  pEl.className = 'badge ' + badgeCls(pct);
+  pEl.textContent = meta>0 ? p.toFixed(1).replace('.',',')+'% da meta' : 'Meta não definida';
+  const f = faixaCls(meta>0?p:null);
+  pEl.className = 'badge meta-badge ' + f.badge;
   window._b2bLive = { acess, equip, total, meta };
 }
 
-/* ═══════════════════════════════════════════════════════════
-   ESTOQUE — planilha real
-   Oxigenar: linha 36 header, dados linhas 38-42, cols A=equip,B=locados,C=vendidos
-   Pulmonair: mesma linha, cols E=equip,F=locados,G=vendidos
-═══════════════════════════════════════════════════════════ */
+/* ═══ ESTOQUE ═══ */
 function updateEstoque() {
   const rows = liveData.ec;
   if (!rows) return;
-
-  // Lê linhas 38 a 42 (índice 37-41)
-  const oxRows = [], pulRows = [];
-  for (let r = 38; r <= 42; r++) {
-    const row = rows[r-1];
-    if (!row) continue;
-    const nomeOx = (row[0]||'').trim();
-    if (nomeOx) oxRows.push({ nome: nomeOx, loc: num(row[1]), vd: num(row[2]) });
-    const nomePul = (row[4]||'').trim();
-    if (nomePul) pulRows.push({ nome: nomePul, loc: num(row[5]), vd: num(row[6]) });
+  const oxR=[], pulR=[];
+  for (let r=38;r<=42;r++){
+    const row=rows[r-1]; if(!row) continue;
+    const nOx=(row[0]||'').trim();
+    if(nOx) oxR.push({nome:nOx, loc:num(row[1]), vd:num(row[2])});
+    const nPul=(row[4]||'').trim();
+    if(nPul) pulR.push({nome:nPul, loc:num(row[5]), vd:num(row[6])});
   }
-
-  function renderEstoque(tbody, list) {
-    if (!list.length) {
-      document.getElementById(tbody).innerHTML = '<tr><td colspan="3" style="text-align:center;color:#94a3b8;padding:16px">Sem dados</td></tr>';
-      return;
-    }
-    document.getElementById(tbody).innerHTML = list.map((e,i) => `
-      <tr style="${i%2===1?'background:#f8fafc':''}">
-        <td>${e.nome}</td>
-        <td class="r bold">${e.loc.toLocaleString('pt-BR')}</td>
-        <td class="r">${e.vd.toLocaleString('pt-BR')}</td>
-      </tr>`).join('');
+  function render(tbodyId, list){
+    document.getElementById(tbodyId).innerHTML = list.length
+      ? list.map((e,i)=>`<tr style="${i%2?'background:#f8fafc':''}"><td>${e.nome}</td><td class="r bold">${e.loc.toLocaleString('pt-BR')}</td><td class="r">${e.vd.toLocaleString('pt-BR')}</td></tr>`).join('')
+      : '<tr><td colspan="3" style="text-align:center;color:#94a3b8;padding:16px">Sem dados — preencha a planilha</td></tr>';
   }
-  renderEstoque('estoque-ox-tbody', oxRows);
-  renderEstoque('estoque-pul-tbody', pulRows);
+  render('estoque-ox-tbody', oxR);
+  render('estoque-pul-tbody', pulR);
 }
 
-/* ═══════════════════════════════════════════════════════════
-   COBRANÇA — planilha real
-   Cols A=data, B=mensalidades recuperadas, C=boletos aberto,
-        D=recorrencias aberto, E=casos graves  (Oxigenar)
-   Cols F=data, G=mensalidades, H=boletos, I=recorrencias (Pulmonair)
-   Linha 2 em diante = dados do mês
-   "Hoje" = última linha preenchida da coluna A
-   "Mês"  = SOMA de toda coluna B (ou G para Pulmonair)
-═══════════════════════════════════════════════════════════ */
+/* ═══ COBRANÇA ═══ */
 function updateCobranca() {
   const rows = liveData.ec;
   if (!rows) return;
-
-  // Encontra última linha preenchida da cobrança (col A tem data)
-  let ultimaLinha = 1;
-  for (let r = 3; r <= 33; r++) {
-    const row = rows[r-1];
-    if (row && (row[0]||'').trim() !== '') ultimaLinha = r;
+  let ultima=2;
+  for(let r=3;r<=33;r++){const row=rows[r-1];if(row&&(row[0]||'').trim())ultima=r;}
+  let oxMes=0,oxBoleto=0,oxRec=0,oxGraves=0,oxHoje=0;
+  let pulMes=0,pulBoleto=0,pulRec=0,pulGraves=0,pulHoje=0;
+  for(let r=3;r<=ultima;r++){
+    const row=rows[r-1]; if(!row||(row[0]||'').trim()==='') continue;
+    const oxV=num(row[1]); oxMes+=oxV; if(r===ultima) oxHoje=oxV;
+    if(num(row[2])>0) oxBoleto=num(row[2]);
+    if(num(row[3])>0) oxRec=num(row[3]);
+    if(num(row[4])>0) oxGraves=num(row[4]);
+    const pulV=num(row[6]); pulMes+=pulV; if(r===ultima) pulHoje=pulV;
+    if(num(row[7])>0) pulBoleto=num(row[7]);
+    if(num(row[8])>0) pulRec=num(row[8]);
   }
-
-  // Oxigenar: col B=recuperado, C=boleto, D=recorrência, E=graves
-  let oxMes=0, oxBoleto=0, oxRec=0, oxGraves=0, oxHoje=0;
-  // Pulmonair: col G=recuperado, H=boleto, I=recorrência
-  let pulMes=0, pulBoleto=0, pulRec=0, pulGraves=0, pulHoje=0;
-
-  for (let r = 3; r <= ultimaLinha; r++) {
-    const row = rows[r-1];
-    if (!row) continue;
-    const data = (row[0]||'').trim();
-    if (!data) continue;
-
-    const oxRec_val = num(row[1]);
-    oxMes    += oxRec_val;
-    // última linha = hoje
-    if (r === ultimaLinha) { oxHoje = oxRec_val; }
-
-    // Para boleto/recorrência/graves usamos o ÚLTIMO valor (estado atual, não soma)
-    if (num(row[2]) > 0) oxBoleto = num(row[2]);
-    if (num(row[3]) > 0) oxRec    = num(row[3]);
-    if (num(row[4]) > 0) oxGraves = num(row[4]);
-
-    // Pulmonair
-    const pulRec_val = num(row[6]);
-    pulMes += pulRec_val;
-    if (r === ultimaLinha) { pulHoje = pulRec_val; }
-    if (num(row[7]) > 0) pulBoleto = num(row[7]);
-    if (num(row[8]) > 0) pulRec    = num(row[8]);
-  }
-
-  function setVal(id, v, isBrl=true) {
-    const el = document.getElementById(id);
-    if (el) el.textContent = isBrl ? brl(v) : String(v);
-  }
-
-  setVal('cob-ox-hoje',   oxHoje);
-  setVal('cob-ox-mes',    oxMes);
-  setVal('cob-ox-boleto', oxBoleto);
-  setVal('cob-ox-rec',    oxRec);
-  setVal('cob-ox-graves', oxGraves, false);
-
-  setVal('cob-pul-hoje',   pulHoje);
-  setVal('cob-pul-mes',    pulMes);
-  setVal('cob-pul-boleto', pulBoleto);
-  setVal('cob-pul-rec',    pulRec);
-  setVal('cob-pul-graves', pulGraves, false);
-
-  setVal('cob-grp-hoje',   oxHoje   + pulHoje);
-  setVal('cob-grp-mes',    oxMes    + pulMes);
-  setVal('cob-grp-boleto', oxBoleto + pulBoleto);
-  setVal('cob-grp-rec',    oxRec    + pulRec);
-  setVal('cob-grp-graves', (oxGraves + pulGraves) || 0, false);
+  function sv(id,v,isBrl=true){const el=document.getElementById(id);if(el)el.textContent=isBrl?brl(v):String(v);}
+  sv('cob-ox-hoje',oxHoje); sv('cob-ox-mes',oxMes); sv('cob-ox-boleto',oxBoleto); sv('cob-ox-rec',oxRec); sv('cob-ox-graves',oxGraves,false);
+  sv('cob-pul-hoje',pulHoje); sv('cob-pul-mes',pulMes); sv('cob-pul-boleto',pulBoleto); sv('cob-pul-rec',pulRec); sv('cob-pul-graves',pulGraves,false);
+  sv('cob-grp-hoje',oxHoje+pulHoje); sv('cob-grp-mes',oxMes+pulMes); sv('cob-grp-boleto',oxBoleto+pulBoleto); sv('cob-grp-rec',oxRec+pulRec); sv('cob-grp-graves',oxGraves+pulGraves,false);
 }
 
-/* ═══════════════════════════════════════════════════════════
-   ORQUESTRA
-═══════════════════════════════════════════════════════════ */
-function updateAll() {
-  updateB2C();
-  updateB2B();
-  updateEstoque();
-  updateCobranca();
+/* ═══ ORQUESTRA ═══ */
+function updateAll(){ updateB2C(); updateB2B(); updateEstoque(); updateCobranca(); renderDailyTables(); }
+
+/* ═══ SNAPSHOTS ═══ */
+const SK='oxigenar_snaps_v3';
+function getSnaps(){try{return JSON.parse(localStorage.getItem(SK)||'{}');}catch{return {};}}
+function saveSnap(d,data){const s=getSnaps();s[d]=data;const k=Object.keys(s).sort();if(k.length>31)delete s[k[0]];localStorage.setItem(SK,JSON.stringify(s));}
+let lastSnapDate=localStorage.getItem('oxigenar_snapdate_v3')||'';
+
+function tryMidnightSnap(){
+  const today=new Date().toLocaleDateString('pt-BR');
+  const h=new Date().getHours();
+  if(lastSnapDate===today)return;
+  if(h!==0&&lastSnapDate!=='')return;
+  const b2c=window._b2cLive||null, b2b=window._b2bLive||null;
+  if(!b2c&&!b2b)return;
+  saveSnap(today,{date:today,b2c,b2b});
+  lastSnapDate=today; localStorage.setItem('oxigenar_snapdate_v3',today);
   renderDailyTables();
 }
 
-/* ═══════════════════════════════════════════════════════════
-   SNAPSHOTS DIÁRIOS
-═══════════════════════════════════════════════════════════ */
-function tryMidnightSnap() {
-  const today = new Date().toLocaleDateString('pt-BR');
-  const h = new Date().getHours();
-  if (lastSnapDate === today) return;
-  if (h !== 0 && lastSnapDate !== '') return;
-  const b2c = window._b2cLive || null;
-  const b2b = window._b2bLive || null;
-  if (!b2c && !b2b) return;
-  saveSnap(today, { date: today, b2c, b2b });
-  lastSnapDate = today;
-  localStorage.setItem('oxigenar_snap_date_v2', today);
-  renderDailyTables();
+function renderDailyTables(){
+  const snaps=getSnaps();
+  const dates=Object.keys(snaps).sort().reverse().slice(0,15);
+  const empty4='<tr><td colspan="4" style="text-align:center;color:#94a3b8;padding:16px">Aguardando primeiro fechamento às 00h...</td></tr>';
+  const empty2='<tr><td colspan="2" style="text-align:center;color:#94a3b8;padding:16px">Aguardando primeiro fechamento às 00h...</td></tr>';
+  document.getElementById('b2b-daily-tbody').innerHTML = dates.length
+    ? dates.map((d,i)=>{const s=snaps[d];if(!s||!s.b2b)return'';const b=s.b2b;return`<tr style="${i%2?'background:#f8fafc':''}"><td>${d}</td><td class="r">${brl(b.acess||0)}</td><td class="r">${brl(b.equip||0)}</td><td class="r bold">${brl(b.total||0)}</td></tr>`;}).join('') || empty4
+    : empty4;
+  document.getElementById('b2c-daily-tbody').innerHTML = dates.length
+    ? dates.map((d,i)=>{const s=snaps[d];if(!s||!s.b2c)return'';const t=s.b2c.grandTotal||0;return`<tr style="${i%2?'background:#f8fafc':''}"><td>${d}</td><td class="r bold" style="color:#2563eb">${brl(t)}</td></tr>`;}).join('') || empty2
+    : empty2;
 }
 
-function renderDailyTables() {
-  const snaps = getSnaps();
-  const dates = Object.keys(snaps).sort().reverse().slice(0, 15);
-
-  // B2B
-  if (!dates.length) {
-    document.getElementById('b2b-daily-tbody').innerHTML =
-      '<tr><td colspan="4" style="text-align:center;color:#94a3b8;padding:16px">Aguardando primeiro fechamento às 00h...</td></tr>';
-  } else {
-    document.getElementById('b2b-daily-tbody').innerHTML = dates.map((d,i) => {
-      const s = snaps[d]; if (!s||!s.b2b) return '';
-      const b = s.b2b;
-      return `<tr style="${i%2?'background:#f8fafc':''}">
-        <td>${d}</td>
-        <td class="r">${brl(b.acess||0)}</td>
-        <td class="r">${brl(b.equip||0)}</td>
-        <td class="r bold">${brl(b.total||0)}</td>
-      </tr>`;
-    }).join('');
-  }
-
-  // B2C resumido
-  if (!dates.length) {
-    document.getElementById('b2c-daily-tbody').innerHTML =
-      '<tr><td colspan="2" style="text-align:center;color:#94a3b8;padding:16px">Aguardando primeiro fechamento às 00h...</td></tr>';
-  } else {
-    document.getElementById('b2c-daily-tbody').innerHTML = dates.map((d,i) => {
-      const s = snaps[d]; if (!s||!s.b2c) return '';
-      const total = s.b2c.grandTotal || 0;
-      return `<tr style="${i%2?'background:#f8fafc':''}">
-        <td>${d}</td>
-        <td class="r bold" style="color:#2563eb">${brl(total)}</td>
-      </tr>`;
-    }).join('');
-  }
+/* ═══ STATUS ═══ */
+function setStatus(txt,ok){
+  document.getElementById('statusTxt').textContent=txt;
+  document.getElementById('statusDot').className='status-dot'+(ok===true?' ok':ok===false?' err':'');
 }
 
-/* ═══════════════════════════════════════════════════════════
-   STATUS BAR
-═══════════════════════════════════════════════════════════ */
-function setStatus(txt, ok) {
-  document.getElementById('statusTxt').textContent = txt;
-  const dot = document.getElementById('statusDot');
-  dot.className = 'status-dot' + (ok === true ? ' ok' : ok === false ? ' err' : '');
+/* ═══ ROTAÇÃO ═══ */
+const LABELS=['B2C · Todas as lojas','B2C · Consolidado','B2B · Oxigenar','Estoque · Grupo','Cobrança · Grupo'];
+let cur=0,playing=true,slideTimer=null,tStart=null,elapsed=0;
+const screens=document.querySelectorAll('.screen');
+const dotsEl=document.getElementById('dots');
+LABELS.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===0?' active':'');d.onclick=()=>goTo(i);dotsEl.appendChild(d);});
+
+function showScreen(idx){
+  screens.forEach((s,i)=>s.classList.toggle('active',i===idx));
+  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+  document.getElementById('screenLabel').textContent=LABELS[idx];
+  document.getElementById('screenCount').textContent=(idx+1)+' / '+LABELS.length;
+}
+function goTo(idx){
+  cur=(idx+LABELS.length)%LABELS.length; showScreen(cur); elapsed=0;
+  const bar=document.getElementById('timerBar'); bar.style.transition='none'; bar.style.width='0%';
+  if(playing){clearTimeout(slideTimer);startSlideTimer();}
+}
+function go(dir){goTo(cur+dir);}
+function startSlideTimer(){
+  tStart=Date.now()-elapsed; const rem=INTERVAL_SLIDE-elapsed;
+  setTimeout(()=>{const bar=document.getElementById('timerBar');bar.style.transition='width '+(rem/1000)+'s linear';bar.style.width='100%';},30);
+  slideTimer=setTimeout(()=>goTo(cur+1),rem);
+}
+function stopSlideTimer(){
+  clearTimeout(slideTimer); elapsed=Date.now()-tStart;
+  const bar=document.getElementById('timerBar'); bar.style.transition='none'; bar.style.width=((elapsed/INTERVAL_SLIDE)*100)+'%';
+}
+function togglePlay(){
+  playing=!playing; const btn=document.getElementById('btnPlay');
+  if(playing){btn.textContent='⏸ Pausar';btn.classList.add('play');startSlideTimer();}
+  else{btn.textContent='▶ Continuar';btn.classList.remove('play');stopSlideTimer();}
 }
 
-/* ═══════════════════════════════════════════════════════════
-   ROTAÇÃO DE TELAS
-═══════════════════════════════════════════════════════════ */
-const LABELS = [
-  'B2C · Lojas 1 (Recreio / Barra / JB)',
-  'B2C · Lojas 2 (Botafogo / Copa / Tijuca)',
-  'B2C · Lojas 3 (VR / Domiciliar / Niterói)',
-  'B2C · Lojas 4 (JF / BH)',
-  'B2C · Lojas 5 (POA / Curitiba / Salvador / Nova Iguaçu)',
-  'B2C · Consolidado todas as lojas',
-  'B2B · Oxigenar',
-  'Estoque · Grupo',
-  'Cobrança · Grupo',
-];
-
-let cur=0, playing=true, slideTimer=null, tStart=null, elapsed=0;
-const screens = document.querySelectorAll('.screen');
-const dotsEl  = document.getElementById('dots');
-
-LABELS.forEach((_,i) => {
-  const d = document.createElement('div');
-  d.className = 'dot' + (i===0?' active':'');
-  d.onclick = () => goTo(i);
-  dotsEl.appendChild(d);
-});
-
-function showScreen(idx) {
-  screens.forEach((s,i) => s.classList.toggle('active', i===idx));
-  document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active',i===idx));
-  document.getElementById('screenLabel').textContent = LABELS[idx];
-  document.getElementById('screenCount').textContent = (idx+1)+' / '+LABELS.length;
+/* ═══ RELÓGIO ═══ */
+function updateClock(){
+  const now=new Date();
+  document.getElementById('clock').textContent=now.toLocaleTimeString('pt-BR');
+  document.getElementById('dateTxt').textContent=now.toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'short'});
+  if(now.getHours()===0&&now.getMinutes()===0&&now.getSeconds()<5)tryMidnightSnap();
 }
 
-function goTo(idx) {
-  cur = (idx + LABELS.length) % LABELS.length;
-  showScreen(cur);
-  elapsed = 0;
-  const bar = document.getElementById('timerBar');
-  bar.style.transition = 'none'; bar.style.width = '0%';
-  if (playing) { clearTimeout(slideTimer); startSlideTimer(); }
-}
-
-function go(dir) { goTo(cur + dir); }
-
-function startSlideTimer() {
-  tStart = Date.now() - elapsed;
-  const rem = INTERVAL_SLIDE - elapsed;
-  setTimeout(() => {
-    const bar = document.getElementById('timerBar');
-    bar.style.transition = 'width ' + (rem/1000) + 's linear';
-    bar.style.width = '100%';
-  }, 30);
-  slideTimer = setTimeout(() => goTo(cur+1), rem);
-}
-
-function stopSlideTimer() {
-  clearTimeout(slideTimer);
-  elapsed = Date.now() - tStart;
-  const bar = document.getElementById('timerBar');
-  bar.style.transition = 'none';
-  bar.style.width = ((elapsed/INTERVAL_SLIDE)*100) + '%';
-}
-
-function togglePlay() {
-  playing = !playing;
-  const btn = document.getElementById('btnPlay');
-  if (playing) {
-    btn.textContent = '⏸ Pausar'; btn.classList.add('play'); startSlideTimer();
-  } else {
-    btn.textContent = '▶ Continuar'; btn.classList.remove('play'); stopSlideTimer();
-  }
-}
-
-/* ═══════════════════════════════════════════════════════════
-   RELÓGIO
-═══════════════════════════════════════════════════════════ */
-function updateClock() {
-  const now = new Date();
-  document.getElementById('clock').textContent = now.toLocaleTimeString('pt-BR');
-  document.getElementById('dateTxt').textContent = now.toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'short'});
-  if (now.getHours()===0 && now.getMinutes()===0 && now.getSeconds()<5) tryMidnightSnap();
-}
-
-/* ═══════════════════════════════════════════════════════════
-   INIT
-═══════════════════════════════════════════════════════════ */
-showScreen(0);
-startSlideTimer();
-setInterval(updateClock, 1000);
-setInterval(fetchAll, INTERVAL_FETCH);
-updateClock();
-renderDailyTables();
-fetchAll();
+/* ═══ INIT ═══ */
+showScreen(0); startSlideTimer();
+setInterval(updateClock,1000); setInterval(fetchAll,INTERVAL_FETCH);
+updateClock(); renderDailyTables(); fetchAll();
 </script>
 </body>
 </html>
