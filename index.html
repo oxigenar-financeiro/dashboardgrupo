@@ -622,9 +622,11 @@ function readLoja(rows, loja) {
   const mLoc  = num(cellRef(rows, loja.metaLoc));
   const mGeral= num(cellRef(rows, loja.metaGeral));
   const locTotal = loc + cpap;
+  const venda = acess + equip;
+  const totalCalc = venda + locTotal;
   const pLoc  = pct(locTotal, mLoc);
-  const pGeral= pct(total || (acess+equip+loc+cpap), mGeral);
-  return { acess, equip, loc, cpap, locTotal, total, mLoc, mGeral, pLoc, pGeral, venda: acess+equip };
+  const pGeral= pct(totalCalc, mGeral);
+  return { acess, equip, loc, cpap, locTotal, total, mLoc, mGeral, pLoc, pGeral, venda: venda, totalCalc: totalCalc };
 }
 
 function updateB2C() {
@@ -638,7 +640,7 @@ function updateB2C() {
   const grid = document.getElementById('todas-lojas-grid');
   grid.innerHTML = LOJAS.map(loja => {
     const v = b2cValores[loja.id];
-    const totalDisp = v.total || (v.venda + v.locTotal);
+    const totalDisp = v.totalCalc;
     const fG = faixaCls(v.pGeral);
     const fL = faixaCls(v.pLoc);
     const pGstr = v.pGeral !== null ? v.pGeral.toFixed(0)+'%' : '—';
@@ -668,7 +670,7 @@ function updateB2C() {
   let totAcess=0,totEquip=0,totLoc=0,totCpap=0,totTotal=0;
   const linhas = LOJAS.map((loja,i) => {
     const v = b2cValores[loja.id];
-    const t = v.total || (v.venda+v.locTotal);
+    const t = v.totalCalc;
     totAcess+=v.acess; totEquip+=v.equip; totLoc+=v.loc; totCpap+=v.cpap; totTotal+=t;
     const fG=faixaCls(v.pGeral), fL=faixaCls(v.pLoc);
     const pGstr = v.pGeral!==null ? v.pGeral.toFixed(1).replace('.',',')+'%' : '—';
