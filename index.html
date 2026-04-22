@@ -228,103 +228,64 @@ td.bold { font-weight: 700; color: #1e293b; }
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- TELA 1 · B2C Lojas (Recreio, Barra, JB) -->
-  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ═══════════════════ TELA 1 · B2C Linha 1 (Recreio / Barra / JB) ═══════════════════ -->
   <div class="screen" id="s1">
     <div class="sh">
       <span class="sh-tag tag-blue">B2C</span>
-      <span class="sh-title">Resultado por loja — mês atual</span>
-      <span class="sh-sub">Venda · Locação · Total · % meta</span>
+      <span class="sh-title">Lojas — linha 1 (acumulado mês)</span>
+      <span class="sh-sub">Venda · Locação · Total</span>
     </div>
-    <div class="lojas-grid">
-
-      <!-- Recreio -->
-      <div class="loja">
-        <div class="loja-name">Recreio</div>
-        <div class="loja-vals">
-          <div>
-            <div class="loja-num" id="rec-venda">—</div>
-            <div class="loja-sub">Venda</div>
-          </div>
-          <div>
-            <div class="loja-num" style="color:#0f766e" id="rec-loc">—</div>
-            <div class="loja-sub">Locação</div>
-          </div>
-        </div>
-        <div class="pct-row">
-          <div class="pbar" style="flex:1"><div class="pbar-fill" id="rec-bar" style="width:0%;background:#059669"></div></div>
-          <span class="badge b-gray" id="rec-pct">—</span>
-        </div>
-        <div style="font-size:12px;color:#475569;margin-top:1px">Total: <strong id="rec-total">—</strong></div>
-      </div>
-
-      <!-- Barra da Tijuca -->
-      <div class="loja">
-        <div class="loja-name">Barra da Tijuca</div>
-        <div class="loja-vals">
-          <div>
-            <div class="loja-num" id="bar-venda">—</div>
-            <div class="loja-sub">Venda</div>
-          </div>
-          <div>
-            <div class="loja-num" style="color:#0f766e" id="bar-loc">—</div>
-            <div class="loja-sub">Locação</div>
-          </div>
-        </div>
-        <div class="pct-row">
-          <div class="pbar" style="flex:1"><div class="pbar-fill" id="bar-bar" style="width:0%;background:#059669"></div></div>
-          <span class="badge b-gray" id="bar-pct">—</span>
-        </div>
-        <div style="font-size:12px;color:#475569;margin-top:1px">Total: <strong id="bar-total">—</strong></div>
-      </div>
-
-      <!-- Jardim Botânico -->
-      <div class="loja">
-        <div class="loja-name">Jardim Botânico</div>
-        <div class="loja-vals">
-          <div>
-            <div class="loja-num" id="jb-venda">—</div>
-            <div class="loja-sub">Venda</div>
-          </div>
-          <div>
-            <div class="loja-num" style="color:#0f766e" id="jb-loc">—</div>
-            <div class="loja-sub">Locação</div>
-          </div>
-        </div>
-        <div class="pct-row">
-          <div class="pbar" style="flex:1"><div class="pbar-fill" id="jb-bar" style="width:0%;background:#059669"></div></div>
-          <span class="badge b-gray" id="jb-pct">—</span>
-        </div>
-        <div style="font-size:12px;color:#475569;margin-top:1px">Total: <strong id="jb-total">—</strong></div>
-      </div>
-
-      <!-- Espaço para lojas futuras -->
-      <div class="loja" style="border-style:dashed;background:#f8fafc">
-        <div class="loja-name" style="color:#cbd5e1">Em breve</div>
-        <div style="font-size:12px;color:#cbd5e1;margin-top:8px">Loja 4</div>
-      </div>
-      <div class="loja" style="border-style:dashed;background:#f8fafc">
-        <div class="loja-name" style="color:#cbd5e1">Em breve</div>
-        <div style="font-size:12px;color:#cbd5e1;margin-top:8px">Loja 5</div>
-      </div>
-      <div class="loja" style="border-style:dashed;background:#f8fafc">
-        <div class="loja-name" style="color:#cbd5e1">Em breve</div>
-        <div style="font-size:12px;color:#cbd5e1;margin-top:8px">Loja 6</div>
-      </div>
-    </div>
+    <div class="lojas-grid" id="grid-l1"></div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- TELA 2 · B2C Resultado do dia (snapshot) -->
-  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ═══════════════════ TELA 2 · B2C Linha 2 (Botafogo / Copa / Tijuca) ═══════════════════ -->
   <div class="screen" id="s2">
     <div class="sh">
       <span class="sh-tag tag-blue">B2C</span>
-      <span class="sh-title">Resultado diário por loja</span>
-      <span class="sh-sub">Snapshot salvo às 00h de cada dia</span>
+      <span class="sh-title">Lojas — linha 2 (acumulado mês)</span>
+      <span class="sh-sub">Venda · Locação · Total</span>
     </div>
-    <div class="card">
+    <div class="lojas-grid" id="grid-l2"></div>
+  </div>
+
+  <!-- ═══════════════════ TELA 3 · B2C Linha 3 (VR / Domiciliar / Niterói) ═══════════════════ -->
+  <div class="screen" id="s3">
+    <div class="sh">
+      <span class="sh-tag tag-blue">B2C</span>
+      <span class="sh-title">Lojas — linha 3 (acumulado mês)</span>
+      <span class="sh-sub">Venda · Locação · Total</span>
+    </div>
+    <div class="lojas-grid" id="grid-l3"></div>
+  </div>
+
+  <!-- ═══════════════════ TELA 4 · B2C Linha 4 (JF / Curitiba / BH) ═══════════════════ -->
+  <div class="screen" id="s4">
+    <div class="sh">
+      <span class="sh-tag tag-blue">B2C</span>
+      <span class="sh-title">Lojas — linha 4 (acumulado mês)</span>
+      <span class="sh-sub">Venda · Locação · Total</span>
+    </div>
+    <div class="lojas-grid" id="grid-l4"></div>
+  </div>
+
+  <!-- ═══════════════════ TELA 5 · B2C Linha 5 (POA / Curitiba / Salvador / Nova Iguaçu) ═══════════════════ -->
+  <div class="screen" id="s5">
+    <div class="sh">
+      <span class="sh-tag tag-blue">B2C</span>
+      <span class="sh-title">Lojas — linha 5 (acumulado mês)</span>
+      <span class="sh-sub">Venda · Locação · Total</span>
+    </div>
+    <div class="lojas-grid" id="grid-l5"></div>
+  </div>
+
+  <!-- ═══════════════════ TELA 6 · B2C Consolidado ao vivo ═══════════════════ -->
+  <div class="screen" id="s6">
+    <div class="sh">
+      <span class="sh-tag tag-blue">B2C</span>
+      <span class="sh-title">Consolidado B2C — todas as lojas</span>
+      <span class="sh-sub">Dados ao vivo · Atualiza a cada 20 min</span>
+    </div>
+    <div class="card" style="overflow-y:auto">
       <table>
         <thead>
           <tr>
@@ -333,66 +294,6 @@ td.bold { font-weight: 700; color: #1e293b; }
             <th class="r">Venda Equip.</th>
             <th class="r">Locação</th>
             <th class="r">Loc. CPAP</th>
-            <th class="r">Total</th>
-            <th class="c">Data</th>
-          </tr>
-        </thead>
-        <tbody id="b2c-daily-tbody">
-          <tr><td colspan="7" style="text-align:center;color:#94a3b8;padding:20px">Aguardando primeiro fechamento às 00h...</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- TELA 3 · B2C Acumulado em tempo real -->
-  <!-- ═══════════════════════════════════════════════ -->
-  <div class="screen" id="s3">
-    <div class="sh">
-      <span class="sh-tag tag-blue">B2C</span>
-      <span class="sh-title">Acumulado em tempo real</span>
-      <span class="sh-sub">Dados ao vivo · Atualiza a cada 20 min</span>
-    </div>
-    <div class="four-kpi">
-      <div class="kpi">
-        <div class="kpi-lbl">Recreio — Total</div>
-        <div class="kpi-val blue" id="kpi-rec-total">—</div>
-        <div style="display:flex;gap:8px;margin-top:6px">
-          <span style="font-size:12px;color:#64748b">V: <strong id="kpi-rec-v">—</strong></span>
-          <span style="font-size:12px;color:#0f766e">L: <strong id="kpi-rec-l">—</strong></span>
-        </div>
-      </div>
-      <div class="kpi">
-        <div class="kpi-lbl">Barra — Total</div>
-        <div class="kpi-val blue" id="kpi-bar-total">—</div>
-        <div style="display:flex;gap:8px;margin-top:6px">
-          <span style="font-size:12px;color:#64748b">V: <strong id="kpi-bar-v">—</strong></span>
-          <span style="font-size:12px;color:#0f766e">L: <strong id="kpi-bar-l">—</strong></span>
-        </div>
-      </div>
-      <div class="kpi">
-        <div class="kpi-lbl">Jardim Botânico — Total</div>
-        <div class="kpi-val blue" id="kpi-jb-total">—</div>
-        <div style="display:flex;gap:8px;margin-top:6px">
-          <span style="font-size:12px;color:#64748b">V: <strong id="kpi-jb-v">—</strong></span>
-          <span style="font-size:12px;color:#0f766e">L: <strong id="kpi-jb-l">—</strong></span>
-        </div>
-      </div>
-      <div class="kpi" style="border-color:#bfdbfe;background:#eff6ff">
-        <div class="kpi-lbl">Total 3 Lojas</div>
-        <div class="kpi-val blue" id="kpi-b2c-grand">—</div>
-        <div style="margin-top:6px"><span class="badge b-blue" id="kpi-b2c-pct">— da meta</span></div>
-      </div>
-    </div>
-    <div class="card">
-      <table>
-        <thead>
-          <tr>
-            <th>Loja</th>
-            <th class="r">Venda Acessórios</th>
-            <th class="r">Venda Equipamentos</th>
-            <th class="r">Locação Geral</th>
-            <th class="r">Locação CPAP</th>
             <th class="r">Total</th>
           </tr>
         </thead>
@@ -403,10 +304,8 @@ td.bold { font-weight: 700; color: #1e293b; }
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- TELA 4 · B2B Resultado -->
-  <!-- ═══════════════════════════════════════════════ -->
-  <div class="screen" id="s4">
+  <!-- ═══════════════════ TELA 7 · B2B ═══════════════════ -->
+  <div class="screen" id="s7">
     <div class="sh">
       <span class="sh-tag tag-purple">B2B</span>
       <span class="sh-title">Oxigenar — Resultado em tempo real</span>
@@ -433,12 +332,10 @@ td.bold { font-weight: 700; color: #1e293b; }
     </div>
     <div class="two-col">
       <div style="display:flex;flex-direction:column;gap:8px">
-        <div class="col-head">Resultado diário (snapshot às 00h)</div>
+        <div class="col-head">Histórico diário (snapshot 00h)</div>
         <div class="card">
           <table>
-            <thead>
-              <tr><th>Data</th><th class="r">Venda Acess.</th><th class="r">Venda Equip.</th><th class="r">Total dia</th></tr>
-            </thead>
+            <thead><tr><th>Data</th><th class="r">Venda Acess.</th><th class="r">Venda Equip.</th><th class="r">Total dia</th></tr></thead>
             <tbody id="b2b-daily-tbody">
               <tr><td colspan="4" style="text-align:center;color:#94a3b8;padding:20px">Aguardando primeiro fechamento às 00h...</td></tr>
             </tbody>
@@ -446,96 +343,86 @@ td.bold { font-weight: 700; color: #1e293b; }
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:8px">
-        <div class="col-head">Informações</div>
-        <div class="kpi" style="flex:1">
-          <div class="kpi-lbl">Como funciona</div>
-          <div style="font-size:13px;color:#475569;line-height:1.7;margin-top:8px">
-            Os valores de <strong>Venda Acessórios (K2)</strong> e <strong>Venda Equipamentos (K3)</strong> são lidos em tempo real da planilha B2B.<br><br>
-            Todo dia às <strong>00h</strong>, o valor acumulado do dia anterior é salvo automaticamente e aparece na tabela ao lado.<br><br>
-            A <strong>Meta Geral (M5)</strong> é usada para calcular o percentual de atingimento.
-          </div>
+        <div class="col-head">Histórico B2C diário</div>
+        <div class="card">
+          <table>
+            <thead><tr><th>Data</th><th class="r">Total lojas</th></tr></thead>
+            <tbody id="b2c-daily-tbody">
+              <tr><td colspan="2" style="text-align:center;color:#94a3b8;padding:20px">Aguardando primeiro fechamento às 00h...</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- TELA 5 · Estoque -->
-  <!-- ═══════════════════════════════════════════════ -->
-  <div class="screen" id="s5">
+  <!-- ═══════════════════ TELA 8 · Estoque ═══════════════════ -->
+  <div class="screen" id="s8">
     <div class="sh">
       <span class="sh-tag tag-teal">Estoque</span>
-      <span class="sh-title">Equipamentos — Locados e vendidos</span>
+      <span class="sh-title">Equipamentos locados e vendidos</span>
       <span class="sh-sub">Grupo Oxigenar</span>
     </div>
-    <div class="card">
-      <table>
-        <thead>
-          <tr>
-            <th>Equipamento</th>
-            <th class="r">Locados Oxigenar</th>
-            <th class="r">Locados Pulmonair</th>
-            <th class="r">Total Locados</th>
-            <th class="r">Vendidos Oxigenar</th>
-            <th class="r">Vendidos Pulmonair</th>
-            <th class="r">Total Vendidos</th>
-          </tr>
-        </thead>
-        <tbody id="estoque-tbody">
-          <tr><td colspan="7" style="text-align:center;color:#94a3b8;padding:20px">Carregando...</td></tr>
-        </tbody>
-      </table>
+    <div class="two-col">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div class="col-head">Oxigenar</div>
+        <div class="card">
+          <table>
+            <thead><tr><th>Equipamento</th><th class="r">Locados</th><th class="r">Vendidos</th></tr></thead>
+            <tbody id="estoque-ox-tbody">
+              <tr><td colspan="3" style="text-align:center;color:#94a3b8;padding:20px">Carregando...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div class="col-head">Pulmonair</div>
+        <div class="card">
+          <table>
+            <thead><tr><th>Equipamento</th><th class="r">Locados</th><th class="r">Vendidos</th></tr></thead>
+            <tbody id="estoque-pul-tbody">
+              <tr><td colspan="3" style="text-align:center;color:#94a3b8;padding:20px">Carregando...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- TELA 6 · Cobrança -->
-  <!-- ═══════════════════════════════════════════════ -->
-  <div class="screen" id="s6">
+  <!-- ═══════════════════ TELA 9 · Cobrança ═══════════════════ -->
+  <div class="screen" id="s9">
     <div class="sh">
       <span class="sh-tag tag-red">Cobrança</span>
       <span class="sh-title">Recuperação e inadimplência</span>
-      <span class="sh-sub">Oxigenar · Pulmonair · Grupo</span>
+      <span class="sh-sub">Oxigenar · Pulmonair · Grupo · Mês atual</span>
     </div>
     <div class="three-col">
-      <!-- Oxigenar -->
       <div class="cb-box">
         <div class="cb-head" style="color:#2563eb">Oxigenar</div>
-        <div class="cb-row"><span class="cb-lbl">Recuperação hoje</span><span class="cb-val green" id="cob-ox-hoje">—</span></div>
-        <div class="cb-row"><span class="cb-lbl">Recuperação semana</span><span class="cb-val green" id="cob-ox-sem">—</span></div>
-        <div class="cb-row"><span class="cb-lbl">Recuperação mês</span><span class="cb-val" id="cob-ox-mes">—</span></div>
-        <div class="cb-row"><span class="cb-lbl">Mês anterior</span><span class="cb-val" style="color:#94a3b8" id="cob-ox-ant">—</span></div>
-        <div class="cb-row"><span class="cb-lbl">Variação</span><span class="cb-val" id="cob-ox-var">—</span></div>
-        <div class="cb-section">Alertas</div>
-        <div class="cb-row"><span class="cb-lbl">Casos graves em aberto</span><span class="cb-val red" id="cob-ox-graves">—</span></div>
+        <div class="cb-row"><span class="cb-lbl">Recuperado hoje</span><span class="cb-val green" id="cob-ox-hoje">—</span></div>
+        <div class="cb-row"><span class="cb-lbl">Recuperado no mês</span><span class="cb-val green" id="cob-ox-mes">—</span></div>
+        <div class="cb-section">Em aberto</div>
+        <div class="cb-row"><span class="cb-lbl">Boletos em aberto</span><span class="cb-val amber" id="cob-ox-boleto">—</span></div>
         <div class="cb-row"><span class="cb-lbl">Recorrências em aberto</span><span class="cb-val amber" id="cob-ox-rec">—</span></div>
-        <div class="cb-row"><span class="cb-lbl">Inadimplência total</span><span class="cb-val red" id="cob-ox-inadim">—</span></div>
+        <div class="cb-row"><span class="cb-lbl">Casos graves</span><span class="cb-val red" id="cob-ox-graves">—</span></div>
       </div>
-      <!-- Pulmonair -->
       <div class="cb-box">
         <div class="cb-head" style="color:#0f766e">Pulmonair</div>
-        <div class="cb-row"><span class="cb-lbl">Recuperação hoje</span><span class="cb-val green" id="cob-pul-hoje">—</span></div>
-        <div class="cb-row"><span class="cb-lbl">Recuperação semana</span><span class="cb-val green" id="cob-pul-sem">—</span></div>
-        <div class="cb-row"><span class="cb-lbl">Recuperação mês</span><span class="cb-val" id="cob-pul-mes">—</span></div>
-        <div class="cb-row"><span class="cb-lbl">Mês anterior</span><span class="cb-val" style="color:#94a3b8" id="cob-pul-ant">—</span></div>
-        <div class="cb-row"><span class="cb-lbl">Variação</span><span class="cb-val" id="cob-pul-var">—</span></div>
-        <div class="cb-section">Alertas</div>
-        <div class="cb-row"><span class="cb-lbl">Casos graves em aberto</span><span class="cb-val red" id="cob-pul-graves">—</span></div>
+        <div class="cb-row"><span class="cb-lbl">Recuperado hoje</span><span class="cb-val green" id="cob-pul-hoje">—</span></div>
+        <div class="cb-row"><span class="cb-lbl">Recuperado no mês</span><span class="cb-val green" id="cob-pul-mes">—</span></div>
+        <div class="cb-section">Em aberto</div>
+        <div class="cb-row"><span class="cb-lbl">Boletos em aberto</span><span class="cb-val amber" id="cob-pul-boleto">—</span></div>
         <div class="cb-row"><span class="cb-lbl">Recorrências em aberto</span><span class="cb-val amber" id="cob-pul-rec">—</span></div>
-        <div class="cb-row"><span class="cb-lbl">Inadimplência total</span><span class="cb-val red" id="cob-pul-inadim">—</span></div>
+        <div class="cb-row"><span class="cb-lbl">Casos graves</span><span class="cb-val red" id="cob-pul-graves">—</span></div>
       </div>
-      <!-- Grupo -->
       <div class="cb-box" style="border-color:#bfdbfe;background:#f8fbff">
         <div class="cb-head" style="color:#1e40af">Grupo</div>
-        <div class="cb-row"><span class="cb-lbl">Recuperação hoje</span><span class="cb-val green" id="cob-grp-hoje">—</span></div>
-        <div class="cb-row"><span class="cb-lbl">Recuperação semana</span><span class="cb-val green" id="cob-grp-sem">—</span></div>
-        <div class="cb-row"><span class="cb-lbl">Recuperação mês</span><span class="cb-val" id="cob-grp-mes">—</span></div>
-        <div class="cb-row"><span class="cb-lbl">Mês anterior</span><span class="cb-val" style="color:#94a3b8" id="cob-grp-ant">—</span></div>
-        <div class="cb-row"><span class="cb-lbl">Variação</span><span class="cb-val" id="cob-grp-var">—</span></div>
-        <div class="cb-section">Alertas</div>
-        <div class="cb-row"><span class="cb-lbl">Casos graves em aberto</span><span class="cb-val red" id="cob-grp-graves">—</span></div>
+        <div class="cb-row"><span class="cb-lbl">Recuperado hoje</span><span class="cb-val green" id="cob-grp-hoje">—</span></div>
+        <div class="cb-row"><span class="cb-lbl">Recuperado no mês</span><span class="cb-val green" id="cob-grp-mes">—</span></div>
+        <div class="cb-section">Em aberto</div>
+        <div class="cb-row"><span class="cb-lbl">Boletos em aberto</span><span class="cb-val amber" id="cob-grp-boleto">—</span></div>
         <div class="cb-row"><span class="cb-lbl">Recorrências em aberto</span><span class="cb-val amber" id="cob-grp-rec">—</span></div>
-        <div class="cb-row"><span class="cb-lbl">Inadimplência total</span><span class="cb-val red" id="cob-grp-inadim">—</span></div>
+        <div class="cb-row"><span class="cb-lbl">Casos graves</span><span class="cb-val red" id="cob-grp-graves">—</span></div>
       </div>
     </div>
   </div>
@@ -552,38 +439,87 @@ td.bold { font-weight: 700; color: #1e293b; }
       <button class="cbtn" onclick="fetchAll()" style="margin-left:8px">&#8635; Atualizar agora</button>
     </div>
     <div class="dots" id="dots"></div>
-    <div style="font-size:12px;color:#94a3b8;font-weight:600" id="screenCount">1 / 6</div>
+    <div style="font-size:12px;color:#94a3b8;font-weight:600" id="screenCount">1 / 9</div>
   </div>
 
 </div><!-- #dash -->
 
 <script>
-/* ══════════════════════════════════════════════════════
-   CONFIGURAÇÃO — edite aqui se precisar
-══════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════
+   URLs DAS PLANILHAS (CSV público do Google Sheets)
+═══════════════════════════════════════════════════════════ */
 const CSV = {
   b2c: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSFCQ6eYfaCBWKUp4kJ5x5W4r9Zcm8g1QY7YwhZZR9NglDsqieTEIAiIleRFLYFB8SwksAGnWIt5Pye/pub?gid=357115975&single=true&output=csv',
   b2b: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ4aQ6YIYoTxp4BeYEwOiM2iDFzcFrIKzsXIUXd0F2qYZ9o-mXOno832zkg-C4eOtZ2LDZFwg5wxCtw/pub?gid=1251665607&single=true&output=csv',
   ec:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vSeKCyDv71GwJgQTWXXUxeugGOUBxqXz9_Vmlj-B0yJctD4Kx66cP_n2_D-Ef0_0WZm51FXLPB2Jw2O/pub?gid=0&single=true&output=csv'
 };
 
-const INTERVAL_SLIDE = 20000;  // 20 seg entre telas
-const INTERVAL_FETCH = 20 * 60 * 1000; // 20 min entre fetches
+const INTERVAL_SLIDE = 20000;
+const INTERVAL_FETCH = 20 * 60 * 1000;
 
-/* ══════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════════
+   MAPA COMPLETO DAS LOJAS B2C
+   Estrutura real da planilha (confirmada pelo usuário):
+   Col G = grupo esquerdo, M = grupo centro, S = grupo direito
+   Blocos de linhas se repetem a cada ~68 linhas:
+     Bloco 1 (linhas 27-32): Recreio | Barra da Tijuca | Jardim Botânico
+     Bloco 2 (linhas 93-98): Botafogo | Copacabana | Tijuca
+     Bloco 3 (linhas 162-169): Volta Redonda | Domiciliar RJ | Niterói
+     Bloco 4 (linhas 231-236): Juiz de Fora | — | Belo Horizonte
+     Bloco 5 (linhas 299-304): Porto Alegre | Curitiba | Salvador
+     Bloco 6 (linhas 367-372): Nova Iguaçu | — | —
+   Linhas: acess=+0, equip=+1, loc=+2, cpap=+3, (pula +4), total=+5
+   Exceção Volta Redonda: linhas 162-169, pula 163 e 166 → acess=162,equip=164,loc=165,cpap=167(sem),total=169
+═══════════════════════════════════════════════════════════ */
+
+// [nome, coluna, linha_acess, linha_equip, linha_loc, linha_cpap, linha_total]
+// coluna: G=6, M=12, S=18 (0-indexed)
+const LOJAS = [
+  // Bloco 1
+  { id:'rec', nome:'Recreio',          col:'G', acess:27, equip:28, loc:29, cpap:30, total:32 },
+  { id:'bar', nome:'Barra da Tijuca',  col:'M', acess:27, equip:28, loc:29, cpap:30, total:32 },
+  { id:'jb',  nome:'Jardim Botânico',  col:'S', acess:27, equip:28, loc:29, cpap:30, total:32 },
+  // Bloco 2
+  { id:'bot', nome:'Botafogo',         col:'G', acess:93, equip:94, loc:95, cpap:96, total:98 },
+  { id:'cop', nome:'Copacabana',       col:'M', acess:93, equip:94, loc:95, cpap:96, total:98 },
+  { id:'tij', nome:'Tijuca',           col:'S', acess:93, equip:94, loc:95, cpap:96, total:98 },
+  // Bloco 3 — Volta Redonda pula linhas 163 e 166
+  { id:'vr',  nome:'Volta Redonda',    col:'G', acess:162, equip:164, loc:165, cpap:null, total:169 },
+  { id:'dom', nome:'Domiciliar RJ',    col:'M', acess:162, equip:163, loc:164, cpap:165, total:167 },
+  { id:'nit', nome:'Niterói',          col:'S', acess:162, equip:163, loc:164, cpap:165, total:167 },
+  // Bloco 4
+  { id:'jf',  nome:'Juiz de Fora',    col:'G', acess:231, equip:232, loc:233, cpap:234, total:236 },
+  { id:'bh',  nome:'Belo Horizonte',  col:'S', acess:231, equip:232, loc:233, cpap:234, total:236 },
+  // Bloco 5
+  { id:'poa', nome:'Porto Alegre',    col:'G', acess:299, equip:300, loc:301, cpap:302, total:304 },
+  { id:'cur', nome:'Curitiba',        col:'M', acess:299, equip:300, loc:301, cpap:302, total:304 },
+  { id:'sal', nome:'Salvador',        col:'S', acess:299, equip:300, loc:301, cpap:302, total:304 },
+  // Bloco 6
+  { id:'nig', nome:'Nova Iguaçu',     col:'G', acess:367, equip:368, loc:369, cpap:370, total:372 },
+];
+
+// Agrupa em telas de 3 (para os cards de loja)
+const LINHAS_TELAS = [
+  ['rec','bar','jb'],
+  ['bot','cop','tij'],
+  ['vr','dom','nit'],
+  ['jf','bh',null],
+  ['poa','cur','sal'],
+  ['nig',null,null],
+];
+
+/* ═══════════════════════════════════════════════════════════
    HELPERS
-══════════════════════════════════════════════════════ */
+═══════════════════════════════════════════════════════════ */
 function parseCSV(text) {
   const rows = [];
-  const lines = text.split('\n');
-  for (const line of lines) {
-    const row = [];
-    let cur = '', inQ = false;
+  for (const line of text.split('\n')) {
+    const row = []; let cur = '', inQ = false;
     for (let i = 0; i < line.length; i++) {
       const ch = line[i];
       if (ch === '"') { inQ = !inQ; }
       else if (ch === ',' && !inQ) { row.push(cur.trim()); cur = ''; }
-      else { cur += ch; }
+      else cur += ch;
     }
     row.push(cur.trim());
     rows.push(row);
@@ -591,149 +527,313 @@ function parseCSV(text) {
   return rows;
 }
 
-// Acessa célula tipo "K2" → rows[1][10]
-function cell(rows, ref) {
-  const match = ref.match(/^([A-Z]+)(\d+)$/i);
-  if (!match) return '';
-  const col = match[1].toUpperCase().split('').reduce((acc, c) => acc * 26 + c.charCodeAt(0) - 64, 0) - 1;
-  const row = parseInt(match[2]) - 1;
-  if (!rows[row] || rows[row][col] === undefined) return '';
-  return rows[row][col];
+function colIdx(col) {
+  return col.toUpperCase().split('').reduce((a, c) => a * 26 + c.charCodeAt(0) - 64, 0) - 1;
+}
+
+function cell(rows, col, linha) {
+  const r = rows[linha - 1];
+  if (!r) return '';
+  return r[colIdx(col)] || '';
 }
 
 function num(v) {
-  if (v === '' || v === null || v === undefined) return 0;
-  const s = String(v).replace(/[R$\s.]/g, '').replace(',', '.');
-  const n = parseFloat(s);
+  if (!v && v !== 0) return 0;
+  const n = parseFloat(String(v).replace(/[R$\s.]/g, '').replace(',', '.'));
   return isNaN(n) ? 0 : n;
 }
 
-function brl(v, compact=false) {
+function brl(v, compact) {
   const n = typeof v === 'number' ? v : num(v);
-  if (compact && Math.abs(n) >= 1000) {
-    return 'R$ ' + (n/1000).toFixed(1).replace('.', ',') + 'k';
-  }
-  return n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 });
+  if (compact && Math.abs(n) >= 1000)
+    return 'R$\u00a0' + (n/1000).toFixed(1).replace('.', ',') + 'k';
+  return n.toLocaleString('pt-BR', { style:'currency', currency:'BRL', minimumFractionDigits:2 });
 }
 
-function pctBadge(val, meta) {
-  if (!meta || meta === 0) return { cls: 'b-gray', txt: '—' };
-  const p = (val / meta) * 100;
-  const txt = p.toFixed(1).replace('.', ',') + '%';
-  if (p >= 95) return { cls: 'b-green', txt };
-  if (p >= 85) return { cls: 'b-green', txt };
-  if (p >= 70) return { cls: 'b-yellow', txt };
-  if (p >= 60) return { cls: 'b-orange', txt };
-  return { cls: 'b-red', txt };
-}
-
-function pbarColor(pct) {
+function pbarCls(pct) {
   if (pct >= 95) return '#059669';
   if (pct >= 85) return '#22c55e';
   if (pct >= 70) return '#d97706';
-  if (pct >= 60) return '#ea580c';
+  if (pct >= 55) return '#ea580c';
   return '#dc2626';
 }
 
-function varColor(vAtual, vAnt) {
-  if (!vAnt) return '#94a3b8';
-  return vAtual >= vAnt ? '#059669' : '#dc2626';
+function badgeCls(pct) {
+  if (pct >= 95) return 'b-green';
+  if (pct >= 85) return 'b-green';
+  if (pct >= 70) return 'b-yellow';
+  if (pct >= 55) return 'b-orange';
+  return 'b-red';
 }
 
-function setText(id, v) {
-  const el = document.getElementById(id);
-  if (el) el.textContent = v;
-}
+function setText(id, v) { const el = document.getElementById(id); if (el) el.textContent = v; }
 
-function setHTML(id, v) {
-  const el = document.getElementById(id);
-  if (el) el.innerHTML = v;
-}
-
-/* ══════════════════════════════════════════════════════
-   STORAGE DOS SNAPSHOTS DIÁRIOS
-══════════════════════════════════════════════════════ */
-const STORAGE_KEY = 'oxigenar_daily_snapshots';
-
-function getSnapshots() {
-  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch { return {}; }
-}
-
-function saveSnapshot(date, data) {
-  const s = getSnapshots();
-  s[date] = data;
-  // Mantém só os últimos 31 dias
+/* ═══════════════════════════════════════════════════════════
+   SNAPSHOT DIÁRIO
+═══════════════════════════════════════════════════════════ */
+const SK = 'oxigenar_snaps_v2';
+function getSnaps() { try { return JSON.parse(localStorage.getItem(SK) || '{}'); } catch { return {}; } }
+function saveSnap(date, data) {
+  const s = getSnaps(); s[date] = data;
   const keys = Object.keys(s).sort();
   if (keys.length > 31) delete s[keys[0]];
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+  localStorage.setItem(SK, JSON.stringify(s));
 }
+let lastSnapDate = localStorage.getItem('oxigenar_snap_date_v2') || '';
 
-/* ══════════════════════════════════════════════════════
-   FETCH DAS PLANILHAS
-══════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════
+   FETCH
+═══════════════════════════════════════════════════════════ */
 let liveData = { b2c: null, b2b: null, ec: null };
-let lastFetchOk = { b2c: false, b2b: false, ec: false };
+let fetchOk   = { b2c: false, b2b: false, ec: false };
 
 async function fetchCSV(url) {
-  // Adiciona cache-bust para evitar cache do browser
-  const sep = url.includes('?') ? '&' : '?';
-  const r = await fetch(url + sep + '_t=' + Date.now(), { cache: 'no-store' });
+  const r = await fetch(url + '&_t=' + Date.now(), { cache: 'no-store' });
   if (!r.ok) throw new Error('HTTP ' + r.status);
   return parseCSV(await r.text());
 }
 
 async function fetchAll() {
-  setStatus('Atualizando...', false);
-  let anyOk = false;
-
-  // B2C
-  try {
-    liveData.b2c = await fetchCSV(CSV.b2c);
-    lastFetchOk.b2c = true;
-    anyOk = true;
-  } catch(e) {
-    lastFetchOk.b2c = false;
-    console.error('B2C fetch error:', e);
+  setStatus('Atualizando...', null);
+  for (const key of ['b2c','b2b','ec']) {
+    try { liveData[key] = await fetchCSV(CSV[key]); fetchOk[key] = true; }
+    catch(e) { fetchOk[key] = false; console.error(key, e); }
   }
-
-  // B2B
-  try {
-    liveData.b2b = await fetchCSV(CSV.b2b);
-    lastFetchOk.b2b = true;
-    anyOk = true;
-  } catch(e) {
-    lastFetchOk.b2b = false;
-    console.error('B2B fetch error:', e);
-  }
-
-  // Estoque/Cobrança
-  try {
-    liveData.ec = await fetchCSV(CSV.ec);
-    lastFetchOk.ec = true;
-    anyOk = true;
-  } catch(e) {
-    lastFetchOk.ec = false;
-    console.error('EC fetch error:', e);
-  }
-
-  updateAllScreens();
-  checkMidnightSnapshot();
-
-  const ok = lastFetchOk.b2c && lastFetchOk.b2b && lastFetchOk.ec;
-  const partial = anyOk && !ok;
-  const now = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-
-  if (ok) setStatus('Atualizado às ' + now, true);
-  else if (partial) setStatus('Parcial — erro em ' + Object.keys(lastFetchOk).filter(k => !lastFetchOk[k]).join(', '), false);
+  updateAll();
+  tryMidnightSnap();
+  const ok = fetchOk.b2c && fetchOk.b2b && fetchOk.ec;
+  const partial = Object.values(fetchOk).some(Boolean) && !ok;
+  const hm = new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+  if (ok) setStatus('Atualizado às ' + hm, true);
+  else if (partial) setStatus('Parcial — falha em: ' + Object.keys(fetchOk).filter(k=>!fetchOk[k]).join(', '), false);
   else setStatus('Erro ao carregar dados', false);
-
   document.getElementById('loadingOverlay').style.display = 'none';
 }
 
-/* ══════════════════════════════════════════════════════
-   ATUALIZAÇÃO DAS TELAS
-══════════════════════════════════════════════════════ */
-function updateAllScreens() {
+/* ═══════════════════════════════════════════════════════════
+   LEITURA B2C
+═══════════════════════════════════════════════════════════ */
+let b2cValores = {};
+
+function readLojaValues(rows, loja) {
+  const acess = num(cell(rows, loja.col, loja.acess));
+  const equip = num(cell(rows, loja.col, loja.equip));
+  const loc   = num(cell(rows, loja.col, loja.loc));
+  const cpap  = loja.cpap ? num(cell(rows, loja.col, loja.cpap)) : 0;
+  const total = num(cell(rows, loja.col, loja.total));
+  return { acess, equip, loc, cpap, total, venda: acess + equip };
+}
+
+function lojaCardHTML(loja, v) {
+  if (!loja || !v) return `
+    <div class="loja" style="border-style:dashed;background:#f8fafc;opacity:0.4">
+      <div class="loja-name" style="color:#cbd5e1">—</div>
+    </div>`;
+  const totalDisp = v.total > 0 ? v.total : (v.venda + v.loc + v.cpap);
+  return `
+    <div class="loja">
+      <div class="loja-name">${loja.nome}</div>
+      <div class="loja-vals">
+        <div>
+          <div class="loja-num">${brl(v.venda, true)}</div>
+          <div class="loja-sub">Venda</div>
+        </div>
+        <div>
+          <div class="loja-num" style="color:#0f766e">${brl(v.loc + v.cpap, true)}</div>
+          <div class="loja-sub">Locação</div>
+        </div>
+      </div>
+      <div style="font-size:12px;color:#475569;margin-top:4px">
+        Total: <strong style="color:#1e293b">${brl(totalDisp)}</strong>
+      </div>
+    </div>`;
+}
+
+function updateB2C() {
+  const rows = liveData.b2c;
+  if (!rows) return;
+
+  b2cValores = {};
+  for (const loja of LOJAS) {
+    b2cValores[loja.id] = readLojaValues(rows, loja);
+  }
+
+  // Renderiza cards por tela
+  LINHAS_TELAS.forEach((ids, idx) => {
+    const gridId = 'grid-l' + (idx + 1);
+    const grid = document.getElementById(gridId);
+    if (!grid) return;
+    grid.innerHTML = ids.map(id => {
+      const loja = id ? LOJAS.find(l => l.id === id) : null;
+      const v = id ? b2cValores[id] : null;
+      return lojaCardHTML(loja, v);
+    }).join('');
+  });
+
+  // Tabela consolidada (tela 6)
+  const totalGeral = { acess:0, equip:0, loc:0, cpap:0, total:0 };
+  const linhas = LOJAS.map((loja, i) => {
+    const v = b2cValores[loja.id];
+    totalGeral.acess += v.acess; totalGeral.equip += v.equip;
+    totalGeral.loc   += v.loc;   totalGeral.cpap  += v.cpap;
+    totalGeral.total += v.total || (v.venda + v.loc + v.cpap);
+    return `<tr style="${i%2===1?'background:#f8fafc':''}">
+      <td>${loja.nome}</td>
+      <td class="r">${brl(v.acess)}</td>
+      <td class="r">${brl(v.equip)}</td>
+      <td class="r">${brl(v.loc)}</td>
+      <td class="r">${brl(v.cpap)}</td>
+      <td class="r bold">${brl(v.total || (v.venda+v.loc+v.cpap))}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('b2c-live-tbody').innerHTML = linhas + `
+    <tr style="background:#eff6ff">
+      <td><strong>Total</strong></td>
+      <td class="r bold">${brl(totalGeral.acess)}</td>
+      <td class="r bold">${brl(totalGeral.equip)}</td>
+      <td class="r bold">${brl(totalGeral.loc)}</td>
+      <td class="r bold">${brl(totalGeral.cpap)}</td>
+      <td class="r bold" style="color:#2563eb">${brl(totalGeral.total)}</td>
+    </tr>`;
+
+  window._b2cLive = { ...b2cValores, grandTotal: totalGeral.total };
+}
+
+/* ═══════════════════════════════════════════════════════════
+   B2B
+═══════════════════════════════════════════════════════════ */
+function updateB2B() {
+  const rows = liveData.b2b;
+  if (!rows) return;
+  const acess = num(cell(rows, 'K', 2));
+  const equip = num(cell(rows, 'K', 3));
+  const meta  = num(cell(rows, 'M', 5));
+  const total = acess + equip;
+  setText('b2b-acess', brl(acess, true));
+  setText('b2b-equip', brl(equip, true));
+  setText('b2b-total', brl(total, true));
+  setText('b2b-meta',  brl(meta,  true));
+  const pct = meta > 0 ? (total/meta)*100 : 0;
+  const pEl = document.getElementById('b2b-pct');
+  pEl.textContent = meta > 0 ? pct.toFixed(1).replace('.',',') + '% da meta' : 'Meta não definida';
+  pEl.className = 'badge ' + badgeCls(pct);
+  window._b2bLive = { acess, equip, total, meta };
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ESTOQUE — planilha real
+   Oxigenar: linha 36 header, dados linhas 38-42, cols A=equip,B=locados,C=vendidos
+   Pulmonair: mesma linha, cols E=equip,F=locados,G=vendidos
+═══════════════════════════════════════════════════════════ */
+function updateEstoque() {
+  const rows = liveData.ec;
+  if (!rows) return;
+
+  // Lê linhas 38 a 42 (índice 37-41)
+  const oxRows = [], pulRows = [];
+  for (let r = 38; r <= 42; r++) {
+    const row = rows[r-1];
+    if (!row) continue;
+    const nomeOx = (row[0]||'').trim();
+    if (nomeOx) oxRows.push({ nome: nomeOx, loc: num(row[1]), vd: num(row[2]) });
+    const nomePul = (row[4]||'').trim();
+    if (nomePul) pulRows.push({ nome: nomePul, loc: num(row[5]), vd: num(row[6]) });
+  }
+
+  function renderEstoque(tbody, list) {
+    if (!list.length) {
+      document.getElementById(tbody).innerHTML = '<tr><td colspan="3" style="text-align:center;color:#94a3b8;padding:16px">Sem dados</td></tr>';
+      return;
+    }
+    document.getElementById(tbody).innerHTML = list.map((e,i) => `
+      <tr style="${i%2===1?'background:#f8fafc':''}">
+        <td>${e.nome}</td>
+        <td class="r bold">${e.loc.toLocaleString('pt-BR')}</td>
+        <td class="r">${e.vd.toLocaleString('pt-BR')}</td>
+      </tr>`).join('');
+  }
+  renderEstoque('estoque-ox-tbody', oxRows);
+  renderEstoque('estoque-pul-tbody', pulRows);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   COBRANÇA — planilha real
+   Cols A=data, B=mensalidades recuperadas, C=boletos aberto,
+        D=recorrencias aberto, E=casos graves  (Oxigenar)
+   Cols F=data, G=mensalidades, H=boletos, I=recorrencias (Pulmonair)
+   Linha 2 em diante = dados do mês
+   "Hoje" = última linha preenchida da coluna A
+   "Mês"  = SOMA de toda coluna B (ou G para Pulmonair)
+═══════════════════════════════════════════════════════════ */
+function updateCobranca() {
+  const rows = liveData.ec;
+  if (!rows) return;
+
+  // Encontra última linha preenchida da cobrança (col A tem data)
+  let ultimaLinha = 1;
+  for (let r = 3; r <= 33; r++) {
+    const row = rows[r-1];
+    if (row && (row[0]||'').trim() !== '') ultimaLinha = r;
+  }
+
+  // Oxigenar: col B=recuperado, C=boleto, D=recorrência, E=graves
+  let oxMes=0, oxBoleto=0, oxRec=0, oxGraves=0, oxHoje=0;
+  // Pulmonair: col G=recuperado, H=boleto, I=recorrência
+  let pulMes=0, pulBoleto=0, pulRec=0, pulGraves=0, pulHoje=0;
+
+  for (let r = 3; r <= ultimaLinha; r++) {
+    const row = rows[r-1];
+    if (!row) continue;
+    const data = (row[0]||'').trim();
+    if (!data) continue;
+
+    const oxRec_val = num(row[1]);
+    oxMes    += oxRec_val;
+    // última linha = hoje
+    if (r === ultimaLinha) { oxHoje = oxRec_val; }
+
+    // Para boleto/recorrência/graves usamos o ÚLTIMO valor (estado atual, não soma)
+    if (num(row[2]) > 0) oxBoleto = num(row[2]);
+    if (num(row[3]) > 0) oxRec    = num(row[3]);
+    if (num(row[4]) > 0) oxGraves = num(row[4]);
+
+    // Pulmonair
+    const pulRec_val = num(row[6]);
+    pulMes += pulRec_val;
+    if (r === ultimaLinha) { pulHoje = pulRec_val; }
+    if (num(row[7]) > 0) pulBoleto = num(row[7]);
+    if (num(row[8]) > 0) pulRec    = num(row[8]);
+  }
+
+  function setVal(id, v, isBrl=true) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = isBrl ? brl(v) : String(v);
+  }
+
+  setVal('cob-ox-hoje',   oxHoje);
+  setVal('cob-ox-mes',    oxMes);
+  setVal('cob-ox-boleto', oxBoleto);
+  setVal('cob-ox-rec',    oxRec);
+  setVal('cob-ox-graves', oxGraves, false);
+
+  setVal('cob-pul-hoje',   pulHoje);
+  setVal('cob-pul-mes',    pulMes);
+  setVal('cob-pul-boleto', pulBoleto);
+  setVal('cob-pul-rec',    pulRec);
+  setVal('cob-pul-graves', pulGraves, false);
+
+  setVal('cob-grp-hoje',   oxHoje   + pulHoje);
+  setVal('cob-grp-mes',    oxMes    + pulMes);
+  setVal('cob-grp-boleto', oxBoleto + pulBoleto);
+  setVal('cob-grp-rec',    oxRec    + pulRec);
+  setVal('cob-grp-graves', (oxGraves + pulGraves) || 0, false);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ORQUESTRA
+═══════════════════════════════════════════════════════════ */
+function updateAll() {
   updateB2C();
   updateB2B();
   updateEstoque();
@@ -741,323 +841,36 @@ function updateAllScreens() {
   renderDailyTables();
 }
 
-function updateB2C() {
-  const rows = liveData.b2c;
-  if (!rows) return;
-
-  // Recreio: G27=acess, G28=equip, G29=loc, G30=cpap, G32=total
-  const recAcess = num(cell(rows, 'G27'));
-  const recEquip = num(cell(rows, 'G28'));
-  const recLoc   = num(cell(rows, 'G29'));
-  const recCpap  = num(cell(rows, 'G30'));
-  const recTotal = num(cell(rows, 'G32'));
-  const recVenda = recAcess + recEquip;
-
-  // Barra: M27..M32
-  const barAcess = num(cell(rows, 'M27'));
-  const barEquip = num(cell(rows, 'M28'));
-  const barLoc   = num(cell(rows, 'M29'));
-  const barCpap  = num(cell(rows, 'M30'));
-  const barTotal = num(cell(rows, 'M32'));
-  const barVenda = barAcess + barEquip;
-
-  // Jardim Botânico: S27..S32
-  const jbAcess = num(cell(rows, 'S27'));
-  const jbEquip = num(cell(rows, 'S28'));
-  const jbLoc   = num(cell(rows, 'S29'));
-  const jbCpap  = num(cell(rows, 'S30'));
-  const jbTotal = num(cell(rows, 'S32'));
-  const jbVenda = jbAcess + jbEquip;
-
-  const grand = recTotal + barTotal + jbTotal;
-
-  // Tela 1 — Lojas
-  setText('rec-venda', brl(recVenda, true));
-  setText('rec-loc',   brl(recLoc + recCpap, true));
-  setText('rec-total', brl(recTotal));
-  document.getElementById('rec-bar').style.width = '0%'; // sem meta ainda
-
-  setText('bar-venda', brl(barVenda, true));
-  setText('bar-loc',   brl(barLoc + barCpap, true));
-  setText('bar-total', brl(barTotal));
-
-  setText('jb-venda', brl(jbVenda, true));
-  setText('jb-loc',   brl(jbLoc + jbCpap, true));
-  setText('jb-total', brl(jbTotal));
-
-  // Tela 3 — KPIs
-  setText('kpi-rec-total', brl(recTotal, true));
-  setText('kpi-rec-v', brl(recVenda, true));
-  setText('kpi-rec-l', brl(recLoc, true));
-
-  setText('kpi-bar-total', brl(barTotal, true));
-  setText('kpi-bar-v', brl(barVenda, true));
-  setText('kpi-bar-l', brl(barLoc, true));
-
-  setText('kpi-jb-total', brl(jbTotal, true));
-  setText('kpi-jb-v', brl(jbVenda, true));
-  setText('kpi-jb-l', brl(jbLoc, true));
-
-  setText('kpi-b2c-grand', brl(grand, true));
-
-  // Tabela ao vivo tela 3
-  document.getElementById('b2c-live-tbody').innerHTML = `
-    <tr>
-      <td>Recreio</td>
-      <td class="r">${brl(recAcess)}</td>
-      <td class="r">${brl(recEquip)}</td>
-      <td class="r">${brl(recLoc)}</td>
-      <td class="r">${brl(recCpap)}</td>
-      <td class="r bold">${brl(recTotal)}</td>
-    </tr>
-    <tr>
-      <td>Barra da Tijuca</td>
-      <td class="r">${brl(barAcess)}</td>
-      <td class="r">${brl(barEquip)}</td>
-      <td class="r">${brl(barLoc)}</td>
-      <td class="r">${brl(barCpap)}</td>
-      <td class="r bold">${brl(barTotal)}</td>
-    </tr>
-    <tr>
-      <td>Jardim Botânico</td>
-      <td class="r">${brl(jbAcess)}</td>
-      <td class="r">${brl(jbEquip)}</td>
-      <td class="r">${brl(jbLoc)}</td>
-      <td class="r">${brl(jbCpap)}</td>
-      <td class="r bold">${brl(jbTotal)}</td>
-    </tr>
-    <tr style="background:#f8fafc">
-      <td><strong>Total</strong></td>
-      <td class="r bold">${brl(recAcess+barAcess+jbAcess)}</td>
-      <td class="r bold">${brl(recEquip+barEquip+jbEquip)}</td>
-      <td class="r bold">${brl(recLoc+barLoc+jbLoc)}</td>
-      <td class="r bold">${brl(recCpap+barCpap+jbCpap)}</td>
-      <td class="r bold" style="color:#2563eb">${brl(grand)}</td>
-    </tr>
-  `;
-
-  // Salva no objeto global para snapshot
-  window._b2cLive = { recAcess, recEquip, recLoc, recCpap, recTotal, barAcess, barEquip, barLoc, barCpap, barTotal, jbAcess, jbEquip, jbLoc, jbCpap, jbTotal };
-}
-
-function updateB2B() {
-  const rows = liveData.b2b;
-  if (!rows) return;
-
-  const acess = num(cell(rows, 'K2'));
-  const equip = num(cell(rows, 'K3'));
-  const meta  = num(cell(rows, 'M5'));
-  const total = acess + equip;
-
-  setText('b2b-acess', brl(acess, true));
-  setText('b2b-equip', brl(equip, true));
-  setText('b2b-total', brl(total, true));
-  setText('b2b-meta',  brl(meta, true));
-
-  const pct = meta > 0 ? ((total / meta) * 100) : 0;
-  const pEl = document.getElementById('b2b-pct');
-  pEl.textContent = meta > 0 ? pct.toFixed(1).replace('.', ',') + '% da meta' : 'Meta não definida';
-  pEl.className = 'badge ' + (pct >= 95 ? 'b-green' : pct >= 85 ? 'b-green' : pct >= 70 ? 'b-yellow' : pct >= 60 ? 'b-orange' : 'b-red');
-
-  window._b2bLive = { acess, equip, total, meta };
-}
-
-function updateEstoque() {
-  const rows = liveData.ec;
-  if (!rows) return;
-
-  // A planilha de estoque/cobrança: aba Estoque começa na linha 6
-  // Equipamentos: linhas 6 a 15, colunas A-G
-  const equipRows = [];
-  for (let r = 6; r <= 15; r++) {
-    if (!rows[r-1]) continue;
-    const nome = rows[r-1][0];
-    if (!nome || nome.trim() === '') continue;
-    equipRows.push({
-      nome,
-      locOx:  num(rows[r-1][1]),
-      locPul: num(rows[r-1][2]),
-      totLoc: num(rows[r-1][3]),
-      vdOx:   num(rows[r-1][4]),
-      vdPul:  num(rows[r-1][5]),
-      totVd:  num(rows[r-1][6]),
-    });
-  }
-
-  if (equipRows.length === 0) {
-    document.getElementById('estoque-tbody').innerHTML = '<tr><td colspan="7" style="text-align:center;color:#94a3b8;padding:20px">Nenhum dado de estoque encontrado. Preencha a planilha.</td></tr>';
-    return;
-  }
-
-  document.getElementById('estoque-tbody').innerHTML = equipRows.map((e, i) => `
-    <tr style="${i % 2 === 1 ? 'background:#f8fafc' : ''}">
-      <td>${e.nome}</td>
-      <td class="r">${e.locOx.toLocaleString('pt-BR')}</td>
-      <td class="r">${e.locPul.toLocaleString('pt-BR')}</td>
-      <td class="r bold">${e.totLoc.toLocaleString('pt-BR')}</td>
-      <td class="r">${e.vdOx.toLocaleString('pt-BR')}</td>
-      <td class="r">${e.vdPul.toLocaleString('pt-BR')}</td>
-      <td class="r bold">${e.totVd.toLocaleString('pt-BR')}</td>
-    </tr>
-  `).join('');
-}
-
-function updateCobranca() {
-  const rows = liveData.ec;
-  if (!rows) return;
-
-  // Cobrança Oxigenar: linhas 6-8 = recuperação (hoje, semana, mês)
-  // Colunas: B=recuperado, C=mês anterior
-  // Alertas: linhas 12-14, coluna B
-
-  // Índice: planilha única publicada em CSV — detecta seção pela coluna A
-  // Vamos ler diretamente pelas posições conhecidas da planilha que geramos
-  function getSection(startLabel) {
-    for (let i = 0; i < rows.length; i++) {
-      if (rows[i][0] && rows[i][0].toString().toUpperCase().includes(startLabel.toUpperCase())) return i;
-    }
-    return -1;
-  }
-
-  // Tenta ler a aba de cobrança — como é CSV de gid=0, é a primeira aba (Estoque)
-  // Para cobrança precisa de gid diferente — mas vamos usar o que foi publicado
-  // Por ora, vamos ler posições fixas baseadas na estrutura que criamos
-
-  // Linha 6 = B6 = cob-ox hoje recuperado, C6 = mês anterior
-  const oxHoje = num(rows[5] && rows[5][1]);
-  const oxSem  = num(rows[6] && rows[6][1]);
-  const oxMes  = num(rows[7] && rows[7][1]);
-  const oxAnt  = num(rows[7] && rows[7][2]);
-
-  const oxGraves = rows[11] && rows[11][1] ? rows[11][1] : '—';
-  const oxRec    = num(rows[12] && rows[12][1]);
-  const oxInadim = num(rows[13] && rows[13][1]);
-
-  // Pulmonair aba separada — sem dados ainda neste CSV, placeholder
-  const pulHoje = 0, pulSem = 0, pulMes = 0, pulAnt = 0;
-  const pulGraves = '—', pulRec = 0, pulInadim = 0;
-
-  function setVal(id, v, isBrl=true) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.textContent = isBrl ? brl(v) : v;
-  }
-  function setVar(id, atual, ant) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    if (!ant) { el.textContent = '—'; return; }
-    const pct = ((atual - ant) / ant * 100);
-    el.textContent = (pct >= 0 ? '+' : '') + pct.toFixed(1).replace('.', ',') + '%';
-    el.style.color = pct >= 0 ? '#059669' : '#dc2626';
-  }
-
-  setVal('cob-ox-hoje', oxHoje);
-  setVal('cob-ox-sem',  oxSem);
-  setVal('cob-ox-mes',  oxMes);
-  setVal('cob-ox-ant',  oxAnt);
-  setVar('cob-ox-var',  oxMes, oxAnt);
-  setText('cob-ox-graves', oxGraves);
-  setVal('cob-ox-rec',    oxRec);
-  setVal('cob-ox-inadim', oxInadim);
-
-  setVal('cob-pul-hoje', pulHoje);
-  setVal('cob-pul-sem',  pulSem);
-  setVal('cob-pul-mes',  pulMes);
-  setVal('cob-pul-ant',  pulAnt);
-  setVar('cob-pul-var',  pulMes, pulAnt);
-  setText('cob-pul-graves', pulGraves);
-  setVal('cob-pul-rec',    pulRec);
-  setVal('cob-pul-inadim', pulInadim);
-
-  // Grupo
-  setVal('cob-grp-hoje', oxHoje + pulHoje);
-  setVal('cob-grp-sem',  oxSem  + pulSem);
-  setVal('cob-grp-mes',  oxMes  + pulMes);
-  setVal('cob-grp-ant',  oxAnt  + pulAnt);
-  setVar('cob-grp-var',  oxMes + pulMes, oxAnt + pulAnt);
-  setText('cob-grp-graves', (parseInt(oxGraves)||0) + (parseInt(pulGraves)||0) || '—');
-  setVal('cob-grp-rec',    oxRec    + pulRec);
-  setVal('cob-grp-inadim', oxInadim + pulInadim);
-}
-
-/* ══════════════════════════════════════════════════════
-   SNAPSHOT DIÁRIO (00h)
-══════════════════════════════════════════════════════ */
-let lastSnapshotDate = localStorage.getItem('oxigenar_last_snapshot_date') || '';
-
-function checkMidnightSnapshot() {
+/* ═══════════════════════════════════════════════════════════
+   SNAPSHOTS DIÁRIOS
+═══════════════════════════════════════════════════════════ */
+function tryMidnightSnap() {
   const today = new Date().toLocaleDateString('pt-BR');
-  if (lastSnapshotDate === today) return; // já salvou hoje
-  const hour = new Date().getHours();
-  if (hour !== 0 && lastSnapshotDate !== '') return; // só salva à 00h (ou primeira vez)
-
-  const snap = {
-    date: today,
-    b2c: window._b2cLive || null,
-    b2b: window._b2bLive || null,
-  };
-
-  if (!snap.b2c && !snap.b2b) return; // sem dados, não salva
-
-  saveSnapshot(today, snap);
-  lastSnapshotDate = today;
-  localStorage.setItem('oxigenar_last_snapshot_date', today);
+  const h = new Date().getHours();
+  if (lastSnapDate === today) return;
+  if (h !== 0 && lastSnapDate !== '') return;
+  const b2c = window._b2cLive || null;
+  const b2b = window._b2bLive || null;
+  if (!b2c && !b2b) return;
+  saveSnap(today, { date: today, b2c, b2b });
+  lastSnapDate = today;
+  localStorage.setItem('oxigenar_snap_date_v2', today);
   renderDailyTables();
 }
 
 function renderDailyTables() {
-  const snaps = getSnapshots();
-  const dates = Object.keys(snaps).sort().reverse().slice(0, 10);
+  const snaps = getSnaps();
+  const dates = Object.keys(snaps).sort().reverse().slice(0, 15);
 
-  // Tabela B2C diário
-  if (dates.length === 0) {
-    document.getElementById('b2c-daily-tbody').innerHTML = '<tr><td colspan="7" style="text-align:center;color:#94a3b8;padding:20px">Aguardando primeiro fechamento às 00h...</td></tr>';
+  // B2B
+  if (!dates.length) {
+    document.getElementById('b2b-daily-tbody').innerHTML =
+      '<tr><td colspan="4" style="text-align:center;color:#94a3b8;padding:16px">Aguardando primeiro fechamento às 00h...</td></tr>';
   } else {
-    document.getElementById('b2c-daily-tbody').innerHTML = dates.map((d, i) => {
-      const s = snaps[d];
-      if (!s || !s.b2c) return `<tr><td>${d}</td><td colspan="6" style="color:#94a3b8">Sem dados B2C</td></tr>`;
-      const b = s.b2c;
-      return `
-        <tr style="${i%2===1?'background:#f8fafc':''}">
-          <td>Recreio — ${d}</td>
-          <td class="r">${brl(b.recAcess||0)}</td>
-          <td class="r">${brl(b.recEquip||0)}</td>
-          <td class="r">${brl(b.recLoc||0)}</td>
-          <td class="r">${brl(b.recCpap||0)}</td>
-          <td class="r bold">${brl(b.recTotal||0)}</td>
-          <td class="c"><span class="badge b-blue">${d}</span></td>
-        </tr>
-        <tr style="${i%2===1?'background:#f8fafc':''}">
-          <td>Barra — ${d}</td>
-          <td class="r">${brl(b.barAcess||0)}</td>
-          <td class="r">${brl(b.barEquip||0)}</td>
-          <td class="r">${brl(b.barLoc||0)}</td>
-          <td class="r">${brl(b.barCpap||0)}</td>
-          <td class="r bold">${brl(b.barTotal||0)}</td>
-          <td class="c"></td>
-        </tr>
-        <tr style="${i%2===1?'background:#f8fafc':''}">
-          <td>Jardim Botânico — ${d}</td>
-          <td class="r">${brl(b.jbAcess||0)}</td>
-          <td class="r">${brl(b.jbEquip||0)}</td>
-          <td class="r">${brl(b.jbLoc||0)}</td>
-          <td class="r">${brl(b.jbCpap||0)}</td>
-          <td class="r bold">${brl(b.jbTotal||0)}</td>
-          <td class="c"></td>
-        </tr>
-      `;
-    }).join('');
-  }
-
-  // Tabela B2B diário
-  if (dates.length === 0) {
-    document.getElementById('b2b-daily-tbody').innerHTML = '<tr><td colspan="4" style="text-align:center;color:#94a3b8;padding:20px">Aguardando primeiro fechamento às 00h...</td></tr>';
-  } else {
-    document.getElementById('b2b-daily-tbody').innerHTML = dates.map((d, i) => {
-      const s = snaps[d];
-      if (!s || !s.b2b) return `<tr><td>${d}</td><td colspan="3" style="color:#94a3b8">Sem dados B2B</td></tr>`;
+    document.getElementById('b2b-daily-tbody').innerHTML = dates.map((d,i) => {
+      const s = snaps[d]; if (!s||!s.b2b) return '';
       const b = s.b2b;
-      return `<tr style="${i%2===1?'background:#f8fafc':''}">
+      return `<tr style="${i%2?'background:#f8fafc':''}">
         <td>${d}</td>
         <td class="r">${brl(b.acess||0)}</td>
         <td class="r">${brl(b.equip||0)}</td>
@@ -1065,44 +878,63 @@ function renderDailyTables() {
       </tr>`;
     }).join('');
   }
+
+  // B2C resumido
+  if (!dates.length) {
+    document.getElementById('b2c-daily-tbody').innerHTML =
+      '<tr><td colspan="2" style="text-align:center;color:#94a3b8;padding:16px">Aguardando primeiro fechamento às 00h...</td></tr>';
+  } else {
+    document.getElementById('b2c-daily-tbody').innerHTML = dates.map((d,i) => {
+      const s = snaps[d]; if (!s||!s.b2c) return '';
+      const total = s.b2c.grandTotal || 0;
+      return `<tr style="${i%2?'background:#f8fafc':''}">
+        <td>${d}</td>
+        <td class="r bold" style="color:#2563eb">${brl(total)}</td>
+      </tr>`;
+    }).join('');
+  }
 }
 
-/* ══════════════════════════════════════════════════════
-   STATUS
-══════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════
+   STATUS BAR
+═══════════════════════════════════════════════════════════ */
 function setStatus(txt, ok) {
   document.getElementById('statusTxt').textContent = txt;
   const dot = document.getElementById('statusDot');
-  dot.className = 'status-dot ' + (ok ? 'ok' : 'err');
+  dot.className = 'status-dot' + (ok === true ? ' ok' : ok === false ? ' err' : '');
 }
 
-/* ══════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════════
    ROTAÇÃO DE TELAS
-══════════════════════════════════════════════════════ */
+═══════════════════════════════════════════════════════════ */
 const LABELS = [
-  'B2C · Resultado por loja',
-  'B2C · Histórico diário',
-  'B2C · Acumulado ao vivo',
+  'B2C · Lojas 1 (Recreio / Barra / JB)',
+  'B2C · Lojas 2 (Botafogo / Copa / Tijuca)',
+  'B2C · Lojas 3 (VR / Domiciliar / Niterói)',
+  'B2C · Lojas 4 (JF / BH)',
+  'B2C · Lojas 5 (POA / Curitiba / Salvador / Nova Iguaçu)',
+  'B2C · Consolidado todas as lojas',
   'B2B · Oxigenar',
-  'Estoque',
-  'Cobrança'
+  'Estoque · Grupo',
+  'Cobrança · Grupo',
 ];
-let cur = 0, playing = true, slideTimer = null, tStart = null, elapsed = 0;
+
+let cur=0, playing=true, slideTimer=null, tStart=null, elapsed=0;
 const screens = document.querySelectorAll('.screen');
 const dotsEl  = document.getElementById('dots');
 
-LABELS.forEach((_, i) => {
+LABELS.forEach((_,i) => {
   const d = document.createElement('div');
-  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.className = 'dot' + (i===0?' active':'');
   d.onclick = () => goTo(i);
   dotsEl.appendChild(d);
 });
 
 function showScreen(idx) {
-  screens.forEach((s, i) => s.classList.toggle('active', i === idx));
-  document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+  screens.forEach((s,i) => s.classList.toggle('active', i===idx));
+  document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active',i===idx));
   document.getElementById('screenLabel').textContent = LABELS[idx];
-  document.getElementById('screenCount').textContent = (idx + 1) + ' / ' + LABELS.length;
+  document.getElementById('screenCount').textContent = (idx+1)+' / '+LABELS.length;
 }
 
 function goTo(idx) {
@@ -1110,8 +942,7 @@ function goTo(idx) {
   showScreen(cur);
   elapsed = 0;
   const bar = document.getElementById('timerBar');
-  bar.style.transition = 'none';
-  bar.style.width = '0%';
+  bar.style.transition = 'none'; bar.style.width = '0%';
   if (playing) { clearTimeout(slideTimer); startSlideTimer(); }
 }
 
@@ -1119,62 +950,52 @@ function go(dir) { goTo(cur + dir); }
 
 function startSlideTimer() {
   tStart = Date.now() - elapsed;
-  const remaining = INTERVAL_SLIDE - elapsed;
+  const rem = INTERVAL_SLIDE - elapsed;
   setTimeout(() => {
     const bar = document.getElementById('timerBar');
-    bar.style.transition = 'width ' + (remaining / 1000) + 's linear';
+    bar.style.transition = 'width ' + (rem/1000) + 's linear';
     bar.style.width = '100%';
   }, 30);
-  slideTimer = setTimeout(() => goTo(cur + 1), remaining);
+  slideTimer = setTimeout(() => goTo(cur+1), rem);
 }
 
 function stopSlideTimer() {
   clearTimeout(slideTimer);
   elapsed = Date.now() - tStart;
-  const pct = (elapsed / INTERVAL_SLIDE) * 100;
   const bar = document.getElementById('timerBar');
   bar.style.transition = 'none';
-  bar.style.width = pct + '%';
+  bar.style.width = ((elapsed/INTERVAL_SLIDE)*100) + '%';
 }
 
 function togglePlay() {
   playing = !playing;
   const btn = document.getElementById('btnPlay');
   if (playing) {
-    btn.textContent = '⏸ Pausar';
-    btn.classList.add('play');
-    startSlideTimer();
+    btn.textContent = '⏸ Pausar'; btn.classList.add('play'); startSlideTimer();
   } else {
-    btn.textContent = '▶ Continuar';
-    btn.classList.remove('play');
-    stopSlideTimer();
+    btn.textContent = '▶ Continuar'; btn.classList.remove('play'); stopSlideTimer();
   }
 }
 
-/* ══════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════════
    RELÓGIO
-══════════════════════════════════════════════════════ */
+═══════════════════════════════════════════════════════════ */
 function updateClock() {
   const now = new Date();
   document.getElementById('clock').textContent = now.toLocaleTimeString('pt-BR');
-  document.getElementById('dateTxt').textContent = now.toLocaleDateString('pt-BR', { weekday: 'short', day: '2-digit', month: 'short' });
-  // Verifica snapshot à meia-noite
-  if (now.getHours() === 0 && now.getMinutes() === 0 && now.getSeconds() < 5) {
-    checkMidnightSnapshot();
-  }
+  document.getElementById('dateTxt').textContent = now.toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'short'});
+  if (now.getHours()===0 && now.getMinutes()===0 && now.getSeconds()<5) tryMidnightSnap();
 }
 
-/* ══════════════════════════════════════════════════════
-   INICIALIZAÇÃO
-══════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════════════════ */
 showScreen(0);
 startSlideTimer();
 setInterval(updateClock, 1000);
 setInterval(fetchAll, INTERVAL_FETCH);
 updateClock();
 renderDailyTables();
-
-// Primeiro fetch
 fetchAll();
 </script>
 </body>
