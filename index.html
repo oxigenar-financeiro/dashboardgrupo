@@ -202,32 +202,7 @@ td.bold { font-weight: 700; color: #1e293b; }
 
 /* ── ERRO ── */
 .data-placeholder { font-size: 13px; color: #94a3b8; font-style: italic; }
-</style>
-</head>
-<body>
 
-<div style="position:relative; width:100%; height:100vh; display:flex; flex-direction:column;" id="dash">
-
-  <!-- LOADING -->
-  <div class="loading-overlay" id="loadingOverlay">
-    <div class="loading-spinner"></div>
-    <div class="loading-txt" id="loadingTxt">Carregando dados das planilhas...</div>
-  </div>
-
-  <!-- TOPBAR -->
-  <div class="topbar">
-    <div class="logo">Grupo <span>Oxigenar</span></div>
-    <div class="screen-pill" id="screenLabel">Carregando...</div>
-    <div class="topbar-right">
-      <div>
-        <span class="status-dot" id="statusDot"></span>
-        <span class="status-txt" id="statusTxt">Aguardando...</span>
-      </div>
-      <span class="date-txt" id="dateTxt"></span>
-      <span class="clock" id="clock">--:--:--</span>
-    </div>
-  </div>
-<style>
 /* Cards compactos para todas as lojas numa tela */
 .lojas-all {
   display: grid;
@@ -304,19 +279,23 @@ td.bold { font-weight: 700; color: #1e293b; }
 .c-85  { background:#fef9c3; color:#854d0e; }   /* 85-95% amarelo */
 .c-70  { background:#ffedd5; color:#9a3412; }   /* 70-85% laranja */
 .c-0   { background:#fee2e2; color:#991b1b; }   /* <70% vermelho */
-.bar-95  { background: #22c55e; }
-.bar-85  { background: #eab308; }
-.bar-70  { background: #f97316; }
-.bar-0   { background: #ef4444; }
+.bar-95  { background:#22c55e; }
+.bar-85  { background:#eab308; }
+.bar-70  { background:#f97316; }
+.bar-0   { background:#ef4444; }
 </style>
+</head>
+<body>
 
-  <!-- ═══ LOADING ═══ -->
+<div style="position:relative; width:100%; height:100vh; display:flex; flex-direction:column;" id="dash">
+
+  <!-- LOADING -->
   <div class="loading-overlay" id="loadingOverlay">
     <div class="loading-spinner"></div>
     <div class="loading-txt" id="loadingTxt">Carregando dados das planilhas...</div>
   </div>
 
-  <!-- ═══ TOPBAR ═══ -->
+  <!-- TOPBAR -->
   <div class="topbar">
     <div class="logo">Grupo <span>Oxigenar</span></div>
     <div class="screen-pill" id="screenLabel">Carregando...</div>
@@ -330,28 +309,28 @@ td.bold { font-weight: 700; color: #1e293b; }
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════════
-       TELA 1 · TODAS AS LOJAS B2C (cards compactos 5 colunas x 3 linhas)
-  ═══════════════════════════════════════════════════════════ -->
-  <div class="screen" id="s1">
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- TELA 1 · B2C Todas as lojas (Grid) -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="screen active" id="s1">
     <div class="sh">
       <span class="sh-tag tag-blue">B2C</span>
       <span class="sh-title">Todas as lojas — acumulado mês</span>
-      <span class="sh-sub">
-        <span style="display:inline-flex;align-items:center;gap:12px">
-          <span><span class="meta-badge c-95">≥95%</span> Meta atingida</span>
-          <span><span class="meta-badge c-85">85–95%</span> Amarelo</span>
-          <span><span class="meta-badge c-70">70–85%</span> Laranja</span>
-          <span><span class="meta-badge c-0">&lt;70%</span> Vermelho</span>
-        </span>
-      </span>
+      <div class="meta-badges" style="margin-left:12px">
+        <span class="meta-badge c-95">≥95% Meta atingida</span>
+        <span class="meta-badge c-85">85–95% Amarelo</span>
+        <span class="meta-badge c-70">70–85% Laranja</span>
+        <span class="meta-badge c-0">&lt;70% Vermelho</span>
+      </div>
     </div>
-    <div class="lojas-all" id="todas-lojas-grid"></div>
+    <div class="lojas-all" id="todas-lojas-grid">
+      <!-- Injetado via JS -->
+    </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════════
-       TELA 2 · CONSOLIDADO B2C (tabela completa)
-  ═══════════════════════════════════════════════════════════ -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- TELA 2 · B2C Consolidado (Tabela) -->
+  <!-- ═══════════════════════════════════════════════ -->
   <div class="screen" id="s2">
     <div class="sh">
       <span class="sh-tag tag-blue">B2C</span>
@@ -375,69 +354,56 @@ td.bold { font-weight: 700; color: #1e293b; }
           </tr>
         </thead>
         <tbody id="b2c-live-tbody">
-          <tr><td colspan="10" style="text-align:center;color:#94a3b8;padding:20px">Carregando...</td></tr>
+          <tr><td colspan="10" style="text-align:center;padding:40px;color:#94a3b8">Carregando...</td></tr>
         </tbody>
       </table>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════════
-       TELA 3 · B2B
-  ═══════════════════════════════════════════════════════════ -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- TELA 3 · B2B Oxigenar -->
+  <!-- ═══════════════════════════════════════════════ -->
   <div class="screen" id="s3">
     <div class="sh">
       <span class="sh-tag tag-purple">B2B</span>
-      <span class="sh-title">Oxigenar — Resultado em tempo real</span>
+      <span class="sh-title">B2B Oxigenar — Resultado em tempo real</span>
       <span class="sh-sub">Atualiza a cada 20 min</span>
     </div>
     <div class="four-kpi">
+      <div class="kpi"><div class="kpi-lbl">Venda Acessórios</div><div class="kpi-val blue" id="b2b-acess">—</div></div>
+      <div class="kpi"><div class="kpi-lbl">Venda Equipamentos</div><div class="kpi-val blue" id="b2b-equip">—</div></div>
+      <div class="kpi"><div class="kpi-lbl">Total B2B</div><div class="kpi-val" id="b2b-total">—</div></div>
       <div class="kpi">
-        <div class="kpi-lbl">Venda Acessórios</div>
-        <div class="kpi-val blue" id="b2b-acess">—</div>
-      </div>
-      <div class="kpi">
-        <div class="kpi-lbl">Venda Equipamentos</div>
-        <div class="kpi-val blue" id="b2b-equip">—</div>
-      </div>
-      <div class="kpi">
-        <div class="kpi-lbl">Total B2B</div>
-        <div class="kpi-val blue" id="b2b-total">—</div>
-      </div>
-      <div class="kpi" style="border-color:#ede9fe;background:#f5f3ff">
         <div class="kpi-lbl">Meta Geral</div>
-        <div class="kpi-val" style="color:#6d28d9" id="b2b-meta">—</div>
-        <div style="margin-top:6px"><span class="badge" style="background:#ede9fe;color:#5b21b6" id="b2b-pct">—</span></div>
+        <div class="kpi-val" style="color:#94a3b8" id="b2b-meta">—</div>
+        <span class="badge" id="b2b-pct">—</span>
       </div>
     </div>
     <div class="two-col">
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <div class="col-head">Histórico diário (snapshot 00h)</div>
-        <div class="card">
-          <table>
-            <thead><tr><th>Data</th><th class="r">Venda Acess.</th><th class="r">Venda Equip.</th><th class="r">Total dia</th></tr></thead>
-            <tbody id="b2b-daily-tbody">
-              <tr><td colspan="4" style="text-align:center;color:#94a3b8;padding:16px">Aguardando primeiro fechamento às 00h...</td></tr>
-            </tbody>
-          </table>
+      <div class="card">
+        <div class="sh" style="padding:12px 16px; border-bottom:1px solid #f1f5f9">
+          <span class="sh-title" style="font-size:14px">Histórico diário (snapshot 00h)</span>
         </div>
+        <table>
+          <thead><tr><th>Data</th><th class="r">Venda Acess.</th><th class="r">Venda Equip.</th><th class="r">Total dia</th></tr></thead>
+          <tbody id="b2b-daily-tbody"></tbody>
+        </table>
       </div>
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <div class="col-head">Histórico B2C diário</div>
-        <div class="card">
-          <table>
-            <thead><tr><th>Data</th><th class="r">Total lojas</th></tr></thead>
-            <tbody id="b2c-daily-tbody">
-              <tr><td colspan="2" style="text-align:center;color:#94a3b8;padding:16px">Aguardando primeiro fechamento às 00h...</td></tr>
-            </tbody>
-          </table>
+      <div class="card">
+        <div class="sh" style="padding:12px 16px; border-bottom:1px solid #f1f5f9">
+          <span class="sh-title" style="font-size:14px">Histórico B2C diário</span>
         </div>
+        <table>
+          <thead><tr><th>Data</th><th class="r">Total lojas</th></tr></thead>
+          <tbody id="b2c-daily-tbody"></tbody>
+        </table>
       </div>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════════
-       TELA 4 · ESTOQUE
-  ═══════════════════════════════════════════════════════════ -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- TELA 4 · Estoque -->
+  <!-- ═══════════════════════════════════════════════ -->
   <div class="screen" id="s4">
     <div class="sh">
       <span class="sh-tag tag-teal">Estoque</span>
@@ -445,30 +411,30 @@ td.bold { font-weight: 700; color: #1e293b; }
       <span class="sh-sub">Grupo Oxigenar</span>
     </div>
     <div class="two-col">
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <div class="col-head">Oxigenar</div>
-        <div class="card">
-          <table>
-            <thead><tr><th>Equipamento</th><th class="r">Locados</th><th class="r">Vendidos</th></tr></thead>
-            <tbody id="estoque-ox-tbody"><tr><td colspan="3" style="text-align:center;color:#94a3b8;padding:16px">Carregando...</td></tr></tbody>
-          </table>
+      <div class="card">
+        <div class="sh" style="padding:10px 15px; background:#f8fafc; border-bottom:1px solid #e2e8f0">
+          <span class="sh-title" style="font-size:13px; color:#2563eb">Oxigenar</span>
         </div>
+        <table>
+          <thead><tr><th>Equipamento</th><th class="r">Locados</th><th class="r">Vendidos</th></tr></thead>
+          <tbody id="estoque-ox-tbody"></tbody>
+        </table>
       </div>
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <div class="col-head">Pulmonair</div>
-        <div class="card">
-          <table>
-            <thead><tr><th>Equipamento</th><th class="r">Locados</th><th class="r">Vendidos</th></tr></thead>
-            <tbody id="estoque-pul-tbody"><tr><td colspan="3" style="text-align:center;color:#94a3b8;padding:16px">Carregando...</td></tr></tbody>
-          </table>
+      <div class="card">
+        <div class="sh" style="padding:10px 15px; background:#f8fafc; border-bottom:1px solid #e2e8f0">
+          <span class="sh-title" style="font-size:13px; color:#0f766e">Pulmonair</span>
         </div>
+        <table>
+          <thead><tr><th>Equipamento</th><th class="r">Locados</th><th class="r">Vendidos</th></tr></thead>
+          <tbody id="estoque-pul-tbody"></tbody>
+        </table>
       </div>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════════
-       TELA 5 · COBRANÇA
-  ═══════════════════════════════════════════════════════════ -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- TELA 5 · Cobrança -->
+  <!-- ═══════════════════════════════════════════════ -->
   <div class="screen" id="s5">
     <div class="sh">
       <span class="sh-tag tag-red">Cobrança</span>
@@ -479,7 +445,7 @@ td.bold { font-weight: 700; color: #1e293b; }
       <div class="cb-box">
         <div class="cb-head" style="color:#2563eb">Oxigenar</div>
         <div class="cb-row"><span class="cb-lbl">Recuperado hoje</span><span class="cb-val green" id="cob-ox-hoje">—</span></div>
-        <div class="cb-row"><span class="cb-lbl">Recuperado no mês</span><span class="cb-val green" id="cob-ox-mes">—</span></div>
+        <div class="cb-row"><span class="cb-lbl">Recuperado no mês</span><span class="cb-val" id="cob-ox-mes">—</span></div>
         <div class="cb-section">Em aberto</div>
         <div class="cb-row"><span class="cb-lbl">Boletos em aberto</span><span class="cb-val amber" id="cob-ox-boleto">—</span></div>
         <div class="cb-row"><span class="cb-lbl">Recorrências em aberto</span><span class="cb-val amber" id="cob-ox-rec">—</span></div>
@@ -488,16 +454,16 @@ td.bold { font-weight: 700; color: #1e293b; }
       <div class="cb-box">
         <div class="cb-head" style="color:#0f766e">Pulmonair</div>
         <div class="cb-row"><span class="cb-lbl">Recuperado hoje</span><span class="cb-val green" id="cob-pul-hoje">—</span></div>
-        <div class="cb-row"><span class="cb-lbl">Recuperado no mês</span><span class="cb-val green" id="cob-pul-mes">—</span></div>
+        <div class="cb-row"><span class="cb-lbl">Recuperado no mês</span><span class="cb-val" id="cob-pul-mes">—</span></div>
         <div class="cb-section">Em aberto</div>
         <div class="cb-row"><span class="cb-lbl">Boletos em aberto</span><span class="cb-val amber" id="cob-pul-boleto">—</span></div>
         <div class="cb-row"><span class="cb-lbl">Recorrências em aberto</span><span class="cb-val amber" id="cob-pul-rec">—</span></div>
         <div class="cb-row"><span class="cb-lbl">Casos graves</span><span class="cb-val red" id="cob-pul-graves">—</span></div>
       </div>
-      <div class="cb-box" style="border-color:#bfdbfe;background:#f8fbff">
+      <div class="cb-box" style="background:#f8fbff; border-color:#bfdbfe">
         <div class="cb-head" style="color:#1e40af">Grupo</div>
         <div class="cb-row"><span class="cb-lbl">Recuperado hoje</span><span class="cb-val green" id="cob-grp-hoje">—</span></div>
-        <div class="cb-row"><span class="cb-lbl">Recuperado no mês</span><span class="cb-val green" id="cob-grp-mes">—</span></div>
+        <div class="cb-row"><span class="cb-lbl">Recuperado no mês</span><span class="cb-val" id="cob-grp-mes">—</span></div>
         <div class="cb-section">Em aberto</div>
         <div class="cb-row"><span class="cb-lbl">Boletos em aberto</span><span class="cb-val amber" id="cob-grp-boleto">—</span></div>
         <div class="cb-row"><span class="cb-lbl">Recorrências em aberto</span><span class="cb-val amber" id="cob-grp-rec">—</span></div>
@@ -582,7 +548,6 @@ function cellRC(rows, colStr, rowNum) {
   return r[colIdx(colStr)] || '';
 }
 
-// Aceita tanto "I29" quanto col+row separados
 function cellRef(rows, ref) {
   const m = ref.match(/^([A-Z]+)(\d+)$/i);
   if (!m) return '';
